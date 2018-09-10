@@ -1,0 +1,29 @@
+var_1 = 10.5 ;
+var2 = 0
+
+Metodo (param) ; //ysysys
+Si var_1 > var2;
+
+Mientras var2 == 0 ; //isis
+
+Hacer otra_var = 8 ;//hajhsa;
+         Lee entrada
+"cadena"//gsagdjas
+'c'
+600....88
+    90
+/gjghgj
+caaa_
+DEC cad
+DEC bool vari1 & vari2 & vari4
+DEC num vari5 & vari2 & varrarara
+DEC car & num
+&&
+
+_fsdf
+
+g4
+
+4g   //No jala
+
+_4g
