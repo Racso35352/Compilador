@@ -24,5 +24,13 @@ public class Nodo{
    public String getNom(){
       return nom;
    }
+   
+   public void setVal(String val){
+      this.val=val;
+   }
+   
+   public String getVal(){
+      return val;
+   }
 
 }

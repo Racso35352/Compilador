@@ -68,7 +68,8 @@ public class Nuevo_Compilador {
          String linea;
          //System.out.println("Linea\t\tToken\t\t\t\tLexema");//Impresión de la tabla
          while((linea=br.readLine())!=null){
-             
+            
+            cont++; 
             cnt++;
             tpalabras.clear();
             tpal.clear();
@@ -105,7 +106,7 @@ public class Nuevo_Compilador {
                linea=newlinea;
                newlinea="";
                    
-               cont++;
+               
                //ban1=false;
                //ban2=false;
                //ban3=false;

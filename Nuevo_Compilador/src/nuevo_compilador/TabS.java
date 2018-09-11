@@ -29,7 +29,7 @@ public class TabS{
       
    }
    
-   public boolean buscar(String nombre){//true si esta, false no esta
+   public Nodo buscar(String nombre){//true si esta, false no esta
       
       Nodo busq=inicio;
       boolean ban=false;
@@ -42,7 +42,11 @@ public class TabS{
             busq=busq.pointer;
          }
       }
-      return ban;     
+      return busq;     
+   }
+   
+   public void editar(Nodo nodo, String val){
+      nodo.setVal(val);
    }
    
    public void imprimir(){

@@ -154,7 +154,7 @@ public class Automatas {
                 if(j==true){
                     for(int m=0;m<a;m++){
                         if(token.get(m).equals("Variable")){
-                            if(tablaA.buscar(lex.get(m))==false)tablaA.agregar(lex.get(m),lex.get(1),"0","N");
+                            if(tablaA.buscar(lex.get(m))==null)tablaA.agregar(lex.get(m),lex.get(1),"0","N");
                             else System.err.println("Linea "+cont+ "     Variable ya declarada");
                         }
                     }
@@ -162,7 +162,7 @@ public class Automatas {
                 
                 if(h==true){
                     
-                    if(tablaA.buscar(lex.get(2))==false)tablaA.agregar(lex.get(2),lex.get(1),lex.get(4),"N");
+                    if(tablaA.buscar(lex.get(2))==null)tablaA.agregar(lex.get(2),lex.get(1),lex.get(4),"N");
                     else System.err.println("Linea "+cont+ "     Variable ya declarada");
                 }
             }
