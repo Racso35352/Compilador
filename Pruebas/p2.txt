@@ -1,9 +1,10 @@
+
 DEC bool nume & nam & asjasja ;
 DEC num iio & iia & hiahia & hhas456 ;
-DEC car lalala & hujia & iia & 4_fgu ;
+DEC car lalala   & hujia & iia & 4_fgu  ;
 DEC cad koko car hulala
 DEC car cad;
-Lee var
+Lee var 
 Mientras ;
 DEC num n = 70 ;
 DEC num l = asdasd ;

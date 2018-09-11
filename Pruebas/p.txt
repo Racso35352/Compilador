@@ -16,7 +16,6 @@ Hacer otra_var = 8 ;//hajhsa;
 caaa_
 DEC cad
 DEC bool vari1 & vari2 & vari4
-DEC num vari5 & vari2 & varrarara
 DEC car & num
 &&
 
@@ -27,3 +26,4 @@ g4
 4g   //No jala
 
 _4g
+DEC num vari5 & vari2 & varrarara ;
