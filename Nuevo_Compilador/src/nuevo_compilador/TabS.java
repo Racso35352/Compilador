@@ -15,9 +15,11 @@ class TabS{
    public void agregar(String nom, String tipo, String val, String lect){
       
       Nodo nuevo= new Nodo(nom,"id"+tam,tipo,val,lect);
-      
       if(tam==0){
          inicio=nuevo;
+      }
+      else{
+       fin.pointer=nuevo;
       }
       
       fin=nuevo;
@@ -28,29 +30,31 @@ class TabS{
    public boolean buscar(String nombre){//true si esta, false no esta
       
       Nodo busq=inicio;
+      boolean ban=false;
       
-      for(int i=0;i<=tam;i++){
-      
-         if(busq.nom.equals(nombre)) return true;
-         
-         busq=busq.pointer;
-      
+      while(busq!=null && ban==false){
+         if(busq.getNom().equals(nombre)){
+            ban=true;
+         }
+         else{
+            busq=busq.pointer;
+         }
       }
-      return false;      
+      return ban;     
    }
    
    public void imprimir(){
    
       Nodo linea=inicio;
       
-      if(inicio!=null){
-         
-         for(int i=0;i<tam;i++){
-            System.out.println(linea.nom+" "+linea.id+" "+linea.tipo+" "+linea.val+" "+linea.lect);
-         }
+      if(linea!=null){         
+      while(linea!=null){
+         System.out.println(linea.nom+" "+linea.id+" "+linea.tipo+" "+linea.val+" "+linea.lect);
+         linea=linea.pointer;
+      }
          
       }
-      else System.out.println("Tablas de simbolos vacía");
+      else System.out.println("Tabla de simbolos vacía");
       
    }
    

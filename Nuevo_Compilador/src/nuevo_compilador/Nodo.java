@@ -19,5 +19,8 @@ class Nodo{
       
    }
    
+   public String getNom(){
+      return nom;
+   }
 
 }
