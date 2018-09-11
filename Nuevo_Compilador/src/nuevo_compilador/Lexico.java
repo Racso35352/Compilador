@@ -39,7 +39,7 @@ public class Lexico {
    
    //En este metodo, de acuerdo a la palabra mandada regresa el token correspondiente
    //Se asigna a la cadena 'token' y es la que se manda con el return del final
-   public static String revisar(int cont,String palabra){
+   public static String revisar(String palabra){
       int c1=0;
       int c2=palabra.length()-1;
       int x=0;
@@ -143,7 +143,7 @@ public class Lexico {
        //  errban=false;
       }
       else if(npal.matches("^[a-zA-Z]\\w*$")){
-         token=("\n"+cont+"\t"+variable);
+         token=variable;
         /* ban3=true;
          if(ban1==true&&ban2==true){
          RevVariable(npal);
@@ -155,13 +155,13 @@ public class Lexico {
       }
       //Indicación de error por default al no coincidir con ningun token
       else{
-         token=("\n"+cont+"\t"+error);
+         token=(error);
       }
       
       }
       
       if(tiene2==true && palabra.charAt(c2)==')'){
-         token=("\n"+cont+"\t"+parametro);
+         token=(parametro);
       }      
       
       return(token);
