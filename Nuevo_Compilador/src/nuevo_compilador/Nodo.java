@@ -1,4 +1,6 @@
-class Nodo{
+package nuevo_compilador;
+
+public class Nodo{
 
    public String nom;
    public String id;

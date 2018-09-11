@@ -21,7 +21,9 @@ public class Nuevo_Compilador {
     public static int cont=0;
     public static String imp="";
     public static List<String> tpalabras = new ArrayList<String>();
+    public static List<String> tpal = new ArrayList<String>();
     public static int np=0;
+    public static Automatas Auto=new Automatas();
     
     
    public static Lexico lex=new Lexico();
@@ -42,7 +44,7 @@ public class Nuevo_Compilador {
       Matcher mat;//Declaración del matcher
       //Cleación del nuevo archivo
       //String ori=Origen.getText();
-      String ori="p2";
+      String ori="p4";
       
       //String dest=Destino.getText();
       String dest="n";
@@ -69,6 +71,7 @@ public class Nuevo_Compilador {
              
             cnt++;
             tpalabras.clear();
+            tpal.clear();
             //errban=true;
             //ArOrig+=cnt+": " +linea+"\n";
             mat = comentario.matcher(linea);
@@ -124,6 +127,8 @@ public class Nuevo_Compilador {
                      c1=x+1;
                      imp+=lex.revisar(palabra)+"\n";//Aqui guardo en la cadena el token recibido el lexico nomas para saber que tipo es y si funciona o no
                      tpalabras.add(lex.revisar(palabra));
+                     tpal.add(palabra);
+                     
                      /* Lo de las clases que no quiere alexius
                      revClass(Ant,palabra);
                      Ant=palabra;
@@ -143,12 +148,13 @@ public class Nuevo_Compilador {
                      revClass(Ant,palabra);
                      Ant=palabra;
                      */
+                     tpal.add(palabra);
                      tpalabras.add(lex.revisar(palabra));
                      palabra="";        
                   }
                   
                } 
-               Automatas.revisar(cont,tpalabras);
+               Auto.revisar(cont,tpalabras,tpal);
                
   //AQUI MERO!!!!! 
   pw.println("" + linea);//Guardar la linea en el nuevo archivo generado
@@ -178,6 +184,9 @@ public class Nuevo_Compilador {
          }           
          
       }
+      System.out.println("\t\t\tTabla de simbolos");
+      System.out.println("Nombre"+"\t\tId\t\tTipo\t\tValor\t\tLectura");
+      Auto.tablaA.imprimir();
       
       ///////////////////////////////System.out.println(imp);
       /*

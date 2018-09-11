@@ -19,10 +19,14 @@ public class Automatas {
     public static int e=0;  
     public static List<String> token = new ArrayList<String>();
     
-    public static void revisar(int cont,List<String> tokens){
+    public static List<String> lex = new ArrayList<String>();
+    public static TabS tablaA= new TabS();
+    
+    public static void revisar(int cont,List<String> tokens,List<String> lexs){
         f=tokens.size();
         e=0;
         token=tokens;
+        lex=lexs;
         if(tokens.get(f-1).equals("Final")){
             
             if(tokens.get(0).equals("Declaracion"))e=1;
@@ -43,7 +47,9 @@ public class Automatas {
     public static void declaracion(int cont){
       
       int a=token.size();
-
+      boolean j=false;
+      boolean h=false;
+      
       
       int x=1;
       int c=1;
@@ -94,6 +100,8 @@ public class Automatas {
             break;
             
             case 5:
+                j=true;
+                
             if(x==a){
                k=false;
             }
@@ -111,6 +119,7 @@ public class Automatas {
              
             break;
             case 7:
+                h=true;
             if(x==a){
                k=false;
             }
@@ -141,5 +150,21 @@ public class Automatas {
             }while(x<=a);
             
             if(k==false)System.out.println("Linea "+cont+ "     Error en la declaracion de variables ");
+            if(k==true){
+                if(j==true){
+                    for(int m=0;m<a;m++){
+                        if(token.get(m).equals("Variable")){
+                            if(tablaA.buscar(lex.get(m))==false)tablaA.agregar(lex.get(m),lex.get(1),"0","N");
+                            else System.err.println("Linea "+cont+ "     Variable ya declarada");
+                        }
+                    }
+                }
+                
+                if(h==true){
+                    
+                    if(tablaA.buscar(lex.get(2))==false)tablaA.agregar(lex.get(2),lex.get(1),lex.get(4),"N");
+                    else System.err.println("Linea "+cont+ "     Variable ya declarada");
+                }
+            }
     }
 }

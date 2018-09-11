@@ -1,9 +1,19 @@
+
+
 DEC num a = 20 ;
+
 DEC num b & c & d ;
+
 DEC cad bal
+
 DEC cad hu & ha & hi ;
+
 Mientas ;
+
 DEC bool c & y & p ;
+
 Leer ;
+
 DEC num a = 40 ;
-DEC bool
+
+DEC bool 

@@ -1,4 +1,6 @@
-class pruebaTab{
+package nuevo_compilador;
+
+public class pruebaTab{
 
    public static TabS tabla= new TabS();
 
@@ -11,7 +13,7 @@ class pruebaTab{
       tabla.agregar("Var_3","Bool","True","N");
       tabla.agregar("Var_4","Int","100","N");
       
-      if(tabla.buscar("Var_3")==true)System.out.println("Si está Var_4");
+      if(tabla.buscar("Var_3")==true)System.out.println("Si estï¿½ Var_4");
       
       tabla.imprimir();
    

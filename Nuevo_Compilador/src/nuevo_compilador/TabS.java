@@ -1,4 +1,6 @@
-class TabS{
+package nuevo_compilador;
+
+public class TabS{
 
    private Nodo inicio;
    private Nodo fin;
@@ -49,12 +51,12 @@ class TabS{
       
       if(linea!=null){         
       while(linea!=null){
-         System.out.println(linea.nom+" "+linea.id+" "+linea.tipo+" "+linea.val+" "+linea.lect);
+         System.out.println(linea.nom+"\t\t"+linea.id+"\t\t "+linea.tipo+"\t\t "+linea.val+" \t\t"+linea.lect);
          linea=linea.pointer;
       }
          
       }
-      else System.out.println("Tabla de simbolos vacía");
+      else System.out.println("Tabla de simbolos vacï¿½a");
       
    }
    
