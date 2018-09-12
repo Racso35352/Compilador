@@ -13,7 +13,7 @@ public class pruebaTab{
       tabla.agregar("Var_3","Bool","True","N");
       tabla.agregar("Var_4","Int","100","N");
       
-      if(tabla.buscar("Var_3")==true)System.out.println("Si est� Var_4");
+//      if(tabla.buscar("Var_3")==true)System.out.println("Si est� Var_4");
       
       tabla.imprimir();
    

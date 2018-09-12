@@ -8,6 +8,6 @@ Public Class {
 DEC bool nume & nam & asjasja carros ;
 DEC num iio & iia & hiahia ;
 DEC car lalala   & hujia & iia & 4_fgu & ;
-DEC cad koko car hulala
+DEC cad koko & carrr ;
 DEC car cad;
 End }

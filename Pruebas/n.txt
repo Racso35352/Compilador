@@ -1,9 +1,11 @@
 DEC num a = 20 ;
+DEC num k ;
 DEC num b & c & d ;
 DEC cad bal
 DEC cad hu & ha & hi ;
-Mientas ;
 DEC bool c & y & p ;
-Leer ;
-DEC num a = 40 ;
-DEC bool
+DEC car h & l & ;
+DEC bool a ;
+DEC cad car ;
+DeC 23ert ;
+DEC bool ;
