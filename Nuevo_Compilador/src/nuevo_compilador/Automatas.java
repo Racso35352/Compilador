@@ -83,7 +83,11 @@ public class Automatas {
             if(x==a){
                k=false;
             }
-            else if(token.get(x).equals("Final")) c=4;
+            else if(token.get(x).equals("Final")){
+                c=4;
+                j=true;
+                k=true;
+            }
             else if(token.get(x).equals("Agregacion")) c=5;
             else if(token.get(x).equals("Asignacion")) c=6;
             else c=8;

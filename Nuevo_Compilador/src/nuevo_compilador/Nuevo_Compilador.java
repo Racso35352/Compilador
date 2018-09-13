@@ -50,7 +50,7 @@ public class Nuevo_Compilador {
       String dest="n";
       
       try{
-         fichero = new FileWriter("C:\\Users\\Oscar\\Documents\\GitHub\\Compilador\\Pruebas\\"+dest+".txt");
+         fichero = new FileWriter("C:\\Users\\Dulce\\Documents\\Github\\Compilador\\Pruebas\\"+dest+".txt");
          pw = new PrintWriter(fichero);
       
       
@@ -58,7 +58,7 @@ public class Nuevo_Compilador {
          FileReader fr = null;
          BufferedReader br = null;
          
-         archivo = new File ("C:\\Users\\Oscar\\Documents\\GitHub\\Compilador\\Pruebas\\"+ori+".txt");
+         archivo = new File ("C:\\Users\\Dulce\\Documents\\Github\\Compilador\\Pruebas\\"+ori+".txt");
          fr = new FileReader (archivo);
          br = new BufferedReader(fr);
          int cant=0;
@@ -149,6 +149,7 @@ public class Nuevo_Compilador {
                      revClass(Ant,palabra);
                      Ant=palabra;
                      */
+                     
                      tpal.add(palabra);
                      tpalabras.add(lex.revisar(palabra));
                      palabra="";        
