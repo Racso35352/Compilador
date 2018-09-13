@@ -30,7 +30,7 @@ public class Automatas {
         if(tokens.get(f-1).equals("Final")){
             
             if(tokens.get(0).equals("Declaracion"))e=1;
-            else System.out.println("Linea "+cont+ "     Error de sintaxis ");
+            else System.out.println("Linea "+cont+ "     Error en palabra reservada ");
             
         }
         else{
@@ -50,6 +50,11 @@ public class Automatas {
       boolean j=false;
       boolean h=false;
       
+      boolean a1 = false;
+      boolean a2 = false;
+      boolean a3 = false;
+      boolean a4 = false;
+      boolean a5 = false;
       
       int x=1;
       int c=1;
@@ -66,27 +71,37 @@ public class Automatas {
                k=false;
             }
             else if(token.get(x).equals("Tipo")) c=2;
+            else if(token.get(x).equals("Final")){
+                c=8;
+                a5=true;
+            }
             else c=8;
         
             
             break;
           case 2:
+              a1=true;
             if(x==a){
                k=false;
             }
             else if(token.get(x).equals("Variable")) c=3;
+            else if(token.get(x).equals("Final")){
+                c=8;
+                a4=true;
+            }
             else c=8;
-             
             break;
             
             case 3:
+                a2=true;
+                a3=false;
             if(x==a){
                k=false;
+               
             }
             else if(token.get(x).equals("Final")){
                 c=4;
                 j=true;
-                k=true;
             }
             else if(token.get(x).equals("Agregacion")) c=5;
             else if(token.get(x).equals("Asignacion")) c=6;
@@ -96,6 +111,7 @@ public class Automatas {
             break;
             
               case 4:
+                
             if(x==a){
                k=true;
             }
@@ -104,6 +120,7 @@ public class Automatas {
             break;
             
             case 5:
+                a3=true;
                 j=true;
                 
             if(x==a){
@@ -153,7 +170,14 @@ public class Automatas {
             x++;
             }while(x<=a);
             
-            if(k==false)System.out.println("Linea "+cont+ "     Error en la declaracion de variables ");
+            if(k==false){
+                if (a5==true)System.out.println("Linea "+cont+ "     Error: No agrego tipo de dato");
+                else if(a1==false) System.out.println("Linea "+cont+ "     Error en el tipo de dato ");
+                else if (a1==true&&a4==true)System.out.println("Linea "+cont+ "     Error: No agrego nombre de variable");
+                else if(a1==true&&a2==false)System.out.println("Linea "+cont+ "     Error: Nombre de variablea no valido ");
+                else if (a1==true&&a2==true&&a3==true)System.out.println("Linea "+cont+ "     Error: Se espera otra variable ");
+               // System.out.println("Linea "+cont+ "     Error en la declaracion de variables ");
+            }
             if(k==true){
                 if(j==true){
                     for(int m=0;m<a;m++){

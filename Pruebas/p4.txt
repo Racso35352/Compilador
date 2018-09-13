@@ -13,6 +13,15 @@ DEC bool a ;
 
 DEC cad car ;
 
+DEC buu arb ; 
+
 DeC 23ert ;
 DEC bool ;
+
+DiC cad CHUY  ;
+DEC ;
+DEC chh chay ;
+
+DEC num ;
+DEC num 4hfj ;
 
