@@ -1,0 +1,29 @@
+
+Imprime ( "hola" ) ;
+
+Imprime ( ) ;
+
+Imprime "hola" ;
+
+Imprime ( "hoa ) ;
+
+Imprime ( a ) ;
+
+Imprime ( "hola" ;
+
+
+
+( "hola ) ;
+
+(sdasd) ;
+
+asdas ; 
+
+(asas ;
+
+'adAD' ;
+"sadasd";
+
+"sadasd" 
+"sadasd" 
+"sadasd" ;

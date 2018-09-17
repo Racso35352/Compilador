@@ -128,6 +128,7 @@ public class Nuevo_Compilador {
                      c1=x+1;
                      imp+=lex.revisar(palabra)+"\n";//Aqui guardo en la cadena el token recibido el lexico nomas para saber que tipo es y si funciona o no
                      tpalabras.add(lex.revisar(palabra));
+                     //System.out.println(lex.revisar(palabra)+"\t "+palabra);
                      tpal.add(palabra);
                      
                      /* Lo de las clases que no quiere alexius
@@ -152,6 +153,7 @@ public class Nuevo_Compilador {
                      
                      tpal.add(palabra);
                      tpalabras.add(lex.revisar(palabra));
+                     //System.out.println(lex.revisar(palabra)+"\t "+palabra);
                      palabra="";        
                   }
                   

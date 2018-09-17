@@ -1,6 +1,8 @@
 
 DEC num a = 20 ;
 
+DEC num j = ;
+
 DEC num k ;
 DEC num b & c & d ;
 DEC cad bal
@@ -12,6 +14,8 @@ DEC car h & l & ;
 DEC bool a ;
 
 DEC cad car ;
+
+"DASDSA" ;
 
 DEC buu arb ; 
 
