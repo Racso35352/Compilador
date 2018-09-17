@@ -23,11 +23,13 @@ public class Lexico {
    public static String desicion="Desicion";
    public static String imprime="Imprime";
    public static String error="Error";
-   public static String lee="Lee";
+   public static String lee="Lectura";
    public static String asignacion="Asignacion";
    public static String fina="Final";   
    public static String tipo="Tipo";
    public static String parametro="Parametro"; 
+   public static String param1="Parametro1"; 
+   public static String param2="Parametro2"; 
    public static String agregacion="Agregacion";
    public static String cadena="Cadena";
    public static String caracter="Caracter";
@@ -52,29 +54,16 @@ public class Lexico {
       boolean k=true;
       
       //Comparacion de tokens de acuerdo al lexema leido
-      if(palabra.charAt(c1)=='('){
-         tiene1=true;
-         cad="(";
-         token=parametro;
-         //AnLex+=("\t"+cad);
-         if(palabra.charAt(c2)==')'){
-            tiene2=true;
-            cad=")";
-         }
       
-         if(tiene1==true)x=1;
-         if(tiene2==true)y--;
-      }
       
-      else if(palabra.charAt(c1)=='"'){
-         tiene1=true;
+      if(palabra.charAt(c1)=='"'&&palabra.charAt(c2)=='"'){
          cad="\"";
          token=cadena;
          //AnLex+=("\t"+palabra);
          k=false;
       }
       
-      else if(palabra.charAt(c1)=='\''){
+      else if(palabra.charAt(c1)=='\''&&palabra.charAt(c2)=='\''){
          tiene1=true;
          cad="'";
          token=caracter;
@@ -89,6 +78,14 @@ public class Lexico {
       if(k){    
       if(npal.equals(repite)){
          token=repite;
+         
+      }
+      else if(palabra.equals("(")){
+         token=param1;
+         
+      }
+      else if(palabra.equals(")")){
+         token=param2;
          
       }
       else if(npal.equals(hacer)){
@@ -160,9 +157,7 @@ public class Lexico {
       
       }
       
-      if(tiene2==true && palabra.charAt(c2)==')'){
-         token=(parametro);
-      }      
+          
       
       return(token);
    }

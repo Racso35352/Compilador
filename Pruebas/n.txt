@@ -7,6 +7,7 @@ DEC bool c & y & p ;
 DEC car h & l & ;
 DEC bool a ;
 DEC cad car ;
+"DASDSA" ;
 DEC buu arb ;
 DeC 23ert ;
 DEC bool ;
