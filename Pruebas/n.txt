@@ -1,18 +1,10 @@
-DEC num a = 20 ;
-DEC num k ;
-DEC num b & c & d ;
-DEC cad bal
-DEC cad hu & ha & hi ;
-DEC bool c & y & p ;
-DEC car h & l & ;
-DEC bool a ;
-DEC cad car ;
-"DASDSA" ;
-DEC buu arb ;
-DeC 23ert ;
-DEC bool ;
-DiC cad CHUY ;
-DEC ;
-DEC chh chay ;
-DEC num ;
-DEC num 4hfj ;
+Imprime ( "hola" ) ;
+DEC num a = 9 ;
+Imprime ( ) ;
+Imprime "hola" ;
+Imprime ( "hoa ) ;
+Imprime ( a ) ;
+Imprime ( b ) ;
+Imprime ( "hola" ;
+Imprime ( 'p' ) ;
+Imprime ( 'sssad' ) ;

@@ -64,11 +64,14 @@ public class Lexico {
       }
       
       else if(palabra.charAt(c1)=='\''&&palabra.charAt(c2)=='\''){
-         tiene1=true;
+         if(c1==c2||c2>2)token=error;
+         else{
+          tiene1=true;
          cad="'";
          token=caracter;
          //AnLex+=("\t"+palabra);
          k=false;
+         }
       }
       
       for(;x<=y;x++){

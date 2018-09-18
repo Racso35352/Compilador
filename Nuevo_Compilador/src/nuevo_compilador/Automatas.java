@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class Automatas {
     
+    public static String consola="";
     public static int f=0;   
     public static int e=0;  
     public static List<String> token = new ArrayList<String>();
@@ -243,7 +244,7 @@ public class Automatas {
                k=false;
             }
             else if(token.get(x).equals("Variable")) c=3;
-            else if(token.get(x).equals("Cadena")) c=4;
+            else if(token.get(x).equals("Cadena")||token.get(x).equals("Caracter")) c=4;
             else if(token.get(x).equals("Parametro2")){
                 c=7;
                 a4=true;
@@ -258,6 +259,7 @@ public class Automatas {
             
             case 3:
                 a2=true;
+                a7=true;
             if(x==a){
                k=false;
                
@@ -342,20 +344,11 @@ public class Automatas {
                // System.out.println("Linea "+cont+ "     Error en la declaracion de variables ");
             }
             if(k==true){
-                if(j==true){
-                    for(int m=0;m<a;m++){
-                        if(token.get(m).equals("Variable")){
-                            if(tablaA.buscar(lex.get(m))==null)tablaA.agregar(lex.get(m),lex.get(1),"0","N");
-                            else System.err.println("Linea "+cont+ "     Variable ya declarada");
-                        }
-                    }
+                if(a7==true){
+                    if(tablaA.buscar(lex.get(2))==null)System.out.println("Linea "+cont+ "     Error: La variable no se encuentra en la tabla de simbolos");
+                            else consola+=(tablaA.buscar(lex.get(2)).val)+"\n";
                 }
-                
-                if(h==true){
-                    
-                    if(tablaA.buscar(lex.get(2))==null)tablaA.agregar(lex.get(2),lex.get(1),lex.get(4),"N");
-                    else System.err.println("Linea "+cont+ "     Variable ya declarada");
-                }
+                else consola+=(lex.get(2)+"\n");
             }
     }
 }

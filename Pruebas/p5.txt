@@ -1,6 +1,8 @@
 
 Imprime ( "hola" ) ;
 
+DEC num a = 9 ;
+
 Imprime ( ) ;
 
 Imprime "hola" ;
@@ -9,21 +11,12 @@ Imprime ( "hoa ) ;
 
 Imprime ( a ) ;
 
+Imprime ( b ) ;
+
 Imprime ( "hola" ;
 
+Imprime ( 'p' ) ;
+
+Imprime ( 'sssad' ) ;
 
 
-( "hola ) ;
-
-(sdasd) ;
-
-asdas ; 
-
-(asas ;
-
-'adAD' ;
-"sadasd";
-
-"sadasd" 
-"sadasd" 
-"sadasd" ;

@@ -44,7 +44,7 @@ public class Nuevo_Compilador {
       Matcher mat;//Declaración del matcher
       //Cleación del nuevo archivo
       //String ori=Origen.getText();
-      String ori="p4";
+      String ori="p5";
       
       //String dest=Destino.getText();
       String dest="n";
@@ -188,9 +188,11 @@ public class Nuevo_Compilador {
          }           
          
       }
-      System.out.println("\t\t\tTabla de simbolos");
+      System.out.println("\n\t\t\tTabla de simbolos");
       System.out.println("Nombre"+"\t\tId\t\tTipo\t\tValor\t\tLectura");
       Auto.tablaA.imprimir();
+      System.out.println("\n\t\tImpresion en consola");
+      System.out.println(Auto.consola);
       
       ///////////////////////////////System.out.println(imp);
       /*
