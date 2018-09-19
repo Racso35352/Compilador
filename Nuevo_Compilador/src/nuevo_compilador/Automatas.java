@@ -32,6 +32,7 @@ public class Automatas {
             
             if(tokens.get(0).equals("Declaracion"))e=1;
             else if(tokens.get(0).equals("Imprime"))e=2;
+            else if(tokens.get(0).equals("Lectura"))e=3;
             
             else System.out.println("Linea "+cont+ "     Error en palabra reservada ");
             
@@ -43,6 +44,7 @@ public class Automatas {
         
         if(e==1)declaracion(cont);
         if(e==2)impresion(cont);
+        if(e==3)lectura(cont);
         
         
     }
@@ -351,4 +353,60 @@ public class Automatas {
                 else consola+=(lex.get(2)+"\n");
             }
     }
+     
+     public static void lectura(int cont){
+         int a=token.size();
+         int c=1; //caso
+         int x=1;
+         
+         boolean f1=false; //bandera de aceptación
+         boolean f2=false; //bandera de si ya se ha desplegado mensaje de error
+         
+         do{
+             switch(c){
+                 case 1:
+                     if(token.get(x).equals("Variable")){
+                         if(tablaA.buscar(lex.get(x))!=null){
+                             c=2;
+                         }
+                         else{
+                             f2=true;
+                             System.out.println("Linea "+cont+"     Error, variable no declarada");
+                             c=3;
+                         }
+                     }
+                     else{
+                         f2=true;
+                         System.out.println("Linea "+cont+"     Error de sintaxis, se espera una variable");
+                         c=3;
+                     }
+                     break;
+                 case 2:
+                     if(token.get(x).equals("Final")){
+                         f1=true;
+                     }
+                     c=3;
+                     break;
+                 case 3:
+                     f1=false;
+                     //Si entra a este caso, quiere decir que la sintaxis está mal
+                     break;
+                 default:
+                     f2=true;
+                     f1=false;
+                    // System.out.println("Error de sintaxis");
+             }
+             x++;
+         }while(x<a);
+         
+         if(f1==true){
+             System.out.println(cont+"  Aceptacion");
+             //Bloque de aceptación, aqui ira la concatenacion en ensamblador
+             //Se buscara el tipo de dato
+         }
+         else if(f2==false){
+             System.out.println("Linea "+cont+"     Error de sintaxis");
+         }
+     }
+     
 }

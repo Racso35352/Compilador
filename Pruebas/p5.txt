@@ -1,22 +1,15 @@
 
-Imprime ( "hola" ) ;
 
 DEC num a = 9 ;
 
-Imprime ( ) ;
 
-Imprime "hola" ;
 
-Imprime ( "hoa ) ;
+Lee a ;
 
-Imprime ( a ) ;
+Lee b ;
 
-Imprime ( b ) ;
+Lee _asd ;
 
-Imprime ( "hola" ;
-
-Imprime ( 'p' ) ;
-
-Imprime ( 'sssad' ) ;
+Lee ;
 
 
