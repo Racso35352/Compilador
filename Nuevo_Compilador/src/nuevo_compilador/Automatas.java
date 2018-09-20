@@ -62,6 +62,14 @@ public class Automatas {
       boolean a3 = false;
       boolean a4 = false;
       boolean a5 = false;
+      boolean a6 = true;
+      
+      boolean tnum = false;
+      boolean tcad = false;
+      boolean tcar = false;
+      boolean tbool = false;
+      
+      boolean btipo = false;
 
       int x=1;
       int c=1;
@@ -77,7 +85,10 @@ public class Automatas {
             if(x==a){
                k=false;
             }
-            else if(token.get(x).equals("Tipo")) c=2;
+            else if(lex.get(x).equals("num")) c=2;
+            else if(lex.get(x).equals("cad")) c=9;
+            else if(lex.get(x).equals("car")) c=11;
+            else if(lex.get(x).equals("bool")) c=13;
             else if(token.get(x).equals("Final")){
                 c=8;
                 a5=true;
@@ -88,6 +99,49 @@ public class Automatas {
             break;
           case 2:
               a1=true;
+              tnum=true;
+            if(x==a){
+               k=false;
+            }
+            else if(token.get(x).equals("Variable")) c=3;
+            else if(token.get(x).equals("Final")){
+                c=8;
+                a4=true;
+            }
+            else c=8;
+            break;
+            
+            case 9:
+              a1=true;
+              tcad=true;
+            if(x==a){
+               k=false;
+            }
+            else if(token.get(x).equals("Variable")) c=3;
+            else if(token.get(x).equals("Final")){
+                c=8;
+                a4=true;
+            }
+            else c=8;
+            break;
+            
+            case 11:
+              a1=true;
+              tcar=true;
+            if(x==a){
+               k=false;
+            }
+            else if(token.get(x).equals("Variable")) c=3;
+            else if(token.get(x).equals("Final")){
+                c=8;
+                a4=true;
+            }
+            else c=8;
+            break;
+            
+            case 13:
+              a1=true;
+              tbool=true;
             if(x==a){
                k=false;
             }
@@ -143,17 +197,71 @@ public class Automatas {
                k=false;
             }
             else if(token.get(x).equals("Numero")) c=7;
+            else if(token.get(x).equals("Cadena")) c=10;
+            else if(token.get(x).equals("Caracter")) c=12;
+            else if(token.get(x).equals("Booleano")) c=14;
+            else if(token.get(x).equals("Final")){
+                c=8;
+                a6=false;
+            }
             else c=8;
 
             break;
             case 7:
+                
                 h=true;
+                if(tnum==true)btipo=true;
             if(x==a){
                k=false;
             }
-            else if(token.get(x).equals("Final")) c=4;
+            else if(token.get(x).equals("Final")){
+                c=4;
+                
+            }
             else c=8;
 
+
+            break;
+            
+            case 10:
+                h=true;
+                if(tcad==true)btipo=true;
+            if(x==a){
+               k=false;
+            }
+            else if(token.get(x).equals("Final")){
+                c=4;
+                
+            }
+            else c=8;
+
+            break;
+            
+            case 12:
+                h=true;
+                if(tcar==true)btipo=true;
+            if(x==a){
+               k=false;
+            }
+            else if(token.get(x).equals("Final")){
+                c=4;
+                
+            }
+            else c=8;
+
+            break;
+            
+            case 14:
+                h=true;
+                if(tbool==true)btipo=true;
+            if(x==a){
+               k=false;
+            }
+            else if(token.get(x).equals("Final")){
+                c=4;
+                
+            }
+            else c=8;
 
             break;
 
@@ -183,7 +291,9 @@ public class Automatas {
                 else if (a1==true&&a4==true)System.out.println("Linea "+cont+ "     Error: No agrego nombre de variable");
                 else if(a1==true&&a2==false)System.out.println("Linea "+cont+ "     Error: Nombre de variablea no valido ");
                 else if (a1==true&&a2==true&&a3==true)System.out.println("Linea "+cont+ "     Error: Se espera otra variable ");
-               // System.out.println("Linea "+cont+ "     Error en la declaracion de variables ");
+               else if (a6==false)System.out.println("Linea "+cont+ "     Error: Falta asignar valor a la variable ");
+                else if (btipo==false)System.out.println("Linea "+cont+ "     Error: Tipo de variable incorrecto ");
+                // System.out.println("Linea "+cont+ "     Error en la declaracion de variables ");
             }
             if(k==true){
                 if(j==true){
@@ -196,8 +306,8 @@ public class Automatas {
                 }
 
                 if(h==true){
-
-                    if(tablaA.buscar(lex.get(2))==null)tablaA.agregar(lex.get(2),lex.get(1),lex.get(4),"N");
+                    if(btipo==false)System.out.println("Linea "+cont+ "     Error: Tipo de variable incorrecto ");
+                    else if(tablaA.buscar(lex.get(2))==null)tablaA.agregar(lex.get(2),lex.get(1),lex.get(4),"N");
                     else System.err.println("Linea "+cont+ "     Variable ya declarada");
                 }
             }

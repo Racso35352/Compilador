@@ -1,10 +1,26 @@
 
 
-DEC num a = 9 ;
+DEC num a = "aver" ;
 
+
+DEC num a = 6 ; 
+
+DEC num k = 8 ;
+
+DEC cad p = 'b' ;
+
+
+DEC car d = 'b' ;
+
+DEC bool j = Verdadero ;
+
+
+DEC cad n = "SI" ; 
 DEC cad b ;
 
 DEC car c ; 
+
+Lee f ;
 
 Lee a ;
 
@@ -14,4 +30,10 @@ Lee _asd ;
 
 Lee ;
 
+Imprime ( b ) ;
 
+Imprime ("hola" ) ;
+
+Imprime ( "hola" ) ;
+
+Imprime ( d ) ;

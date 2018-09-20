@@ -33,6 +33,7 @@ public class Lexico {
    public static String agregacion="Agregacion";
    public static String cadena="Cadena";
    public static String caracter="Caracter";
+   public static String booleano="Booleano";
    public static String dec="DEC";
    
    
@@ -112,6 +113,9 @@ public class Lexico {
       }
       else if(npal.equals("Si") || npal.equals("Sino")){
          token=desicion;
+      }
+      else if(npal.equals("Verdadero") || npal.equals("Falso")){
+         token=booleano;
       }
       else if(npal.equals("num") || npal.equals("bool")|| npal.equals("cad")|| npal.equals("car")){
          token=tipo;
