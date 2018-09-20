@@ -1,4 +1,6 @@
 DEC num a = 9 ;
+DEC cad b ;
+DEC car c ;
 Lee a ;
 Lee b ;
 Lee _asd ;

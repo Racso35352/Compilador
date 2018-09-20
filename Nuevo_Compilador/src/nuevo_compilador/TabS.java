@@ -49,6 +49,7 @@ public class TabS{
       nodo.setVal(val);
    }
    
+   
    public void imprimir(){
    
       Nodo linea=inicio;

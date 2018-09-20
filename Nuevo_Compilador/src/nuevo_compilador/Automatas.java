@@ -400,6 +400,9 @@ public class Automatas {
          }while(x<a);
 
          if(f1==true){
+             Nodo var=tablaA.buscar(lex.get(1));
+             var.setLect("S");
+             String tipo=var.getTipo();
              //System.out.println(cont+"  Aceptacion");
              //Bloque de aceptación, aqui ira la concatenacion en ensamblador
              //Se buscara el tipo de dato

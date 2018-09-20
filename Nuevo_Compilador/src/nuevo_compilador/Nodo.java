@@ -32,5 +32,13 @@ public class Nodo{
    public String getVal(){
       return val;
    }
+   
+   public void setLect(String est){
+       lect=est;
+   }
+   
+   public String getTipo(){
+       return tipo;
+   }
 
 }
