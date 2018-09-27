@@ -33,6 +33,7 @@ public class Automatas {
             if(tokens.get(0).equals("Declaracion"))e=1;
             else if(tokens.get(0).equals("Imprime"))e=2;
             else if(tokens.get(0).equals("Lectura"))e=3;
+            else if(tokens.get(0).equals("Hacer"))e=4;
 
             else System.out.println("Linea "+cont+ "     Error en palabra reservada ");
 
@@ -45,6 +46,7 @@ public class Automatas {
         if(e==1)declaracion(cont);
         if(e==2)impresion(cont);
         if(e==3)lectura(cont);
+        if(e==4)ciclo(cont);
 
 
     }
@@ -521,5 +523,124 @@ public class Automatas {
              System.out.println("Linea "+cont+"     Error de sintaxis");
          }
      }
+     
+     public static void ciclo (int cont){
+        int a= token.size();
+        int c=1;
+        int x=1;
+        
+        String type="";
+        
+        boolean f1=false;
+        boolean f2=false;
+        
+        do{
+            switch(c){
+                case 1:
+                        if(token.get(x).equals("Variable")){
+                           if(tablaA.buscar(lex.get(x))!=null){
+                            c=2;
+                            type=tablaA.buscar(lex.get(x)).getTipo();
+                        }
+                        else{
+                            f2=true;
+                            System.out.println("Linea "+cont+"     Error, variable no declarada");
+                            c=5;
+                        }
+                    }
+                    else{
+                        f2=true;
+                        System.out.println("Linea "+cont+"     Error de sintaxis, se espera una variable");
+                        c=5;
+                     }
+                        break;
+                case 2:
+                    if(token.get(x).equals("Operador")){
+                        c=3;
+                    }
+                    else{
+                        f2=true;
+                        System.out.println("Linea "+cont+"      Error, se espera operador de decisión");
+                        c=5;
+                    }
+                    break;
+                case 3:
+                    if(!token.get(x).equals("Final")){
+                    switch(type){
+                        case "num":
+                            if(token.get(x).equals("Numero")){
+                                c=4;
+                            }
+                            else{
+                                c=5;
+                                f2=true;
+                                System.out.println("Linea "+cont+"      Error, diferentes tipos de dato");
+                            }
+                            break;
+                        case "cad":
+                            if(token.get(x).equals("Cadena")){
+                                c=4;
+                            }
+                            else{
+                                c=5;
+                                f2=true;
+                                System.out.println("Linea "+cont+"      Error, diferentes tipos de dato");
+                            }
+                            break;
+                        case "car":
+                            if(token.get(x).equals("Caracter")){
+                                c=4;
+                            }else{
+                                c=5;
+                                f2=true;
+                                System.out.println("Linea "+cont+"      Error, diferentes tipos de dato");
+                            }
+                            break;
+                        case "bool":
+                            if(token.get(x).equals("Booleano")){
+                                c=4;
+                            }
+                            else{
+                                c=5;
+                                f2=true;
+                                System.out.println("Linea "+cont+"      Error, diferentes tipos de dato");
+                            }
+                            break;
+                        default: 
+                            System.out.println("Linea "+cont+"       se espera una variable o tipo de dato");
+                            f2=true;
+                            c=5;
+                    }
+                    }
+                    else{
+                        f2=true;
+                        c=5;
+                        System.out.println("Linea "+cont+"     Se espera una variable o tipo de dato");
+                    }
+                    break;
+                case 4:
+                    if(token.get(x).equals("Final")){
+                        f1=true;
+                    }
+                    c=5;
+                    break;
+                case 5:
+                    f1=false;
+                    break;
+                default:
+                    f1=false;
+                    f2=true;
+            }
+            x++;    
+            }while(x<a);
+
+        if(f1==true){
+            System.out.println("aceptado");
+         }
+         else if(f2==false){
+             System.out.println("Linea "+cont+"     Error de sintaxis");
+         }
+        
+        }
 
 }

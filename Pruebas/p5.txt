@@ -2,18 +2,26 @@
 
 DEC num a = "aver" ;
 
-
+DEC bool flag = Verdadero ;
+Hacer flag == 6 ;
 DEC num a = 6 ; 
 
 DEC num k = 8 ;
 
 DEC cad p = 'b' ;
 
+Hacer a ñ 5 ;
 
 DEC car d = 'b' ;
 
 DEC bool j = Verdadero ;
+Hacer a == p ;
 
+Hacer a < 3
+
+Hacer _novar != 2 ;
+
+Hacer a == ;
 
 DEC cad n = "SI" ; 
 DEC cad b ;
