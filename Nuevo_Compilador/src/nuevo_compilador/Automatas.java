@@ -33,6 +33,8 @@ public class Automatas {
             if(tokens.get(0).equals("Declaracion"))e=1;
             else if(tokens.get(0).equals("Imprime"))e=2;
             else if(tokens.get(0).equals("Lectura"))e=3;
+            else if(tokens.get(0).equals("Hacer"))e=4;            
+            else if(tokens.get(0).equals("Desicion"))e=5;
 
             else System.out.println("Linea "+cont+ "     Error en palabra reservada ");
 
@@ -45,6 +47,8 @@ public class Automatas {
         if(e==1)declaracion(cont);
         if(e==2)impresion(cont);
         if(e==3)lectura(cont);
+        if(e==4)ciclo(cont);
+        if(e==5)des(cont);
 
 
     }
@@ -322,6 +326,7 @@ public class Automatas {
 
       boolean a1 = false;
       boolean a2 = false;
+      boolean a22 = false;
       boolean a3 = false;
       boolean a4 = false;
       boolean a5 = false;
@@ -521,5 +526,337 @@ public class Automatas {
              System.out.println("Linea "+cont+"     Error de sintaxis");
          }
      }
+     
+     public static void ciclo (int cont){
+        int a= token.size();
+        int c=1;
+        int x=1;
+        
+        String type="";
+        
+        boolean f1=false;
+        boolean f2=false;
+        
+        do{
+            switch(c){
+                case 1:
+                        if(token.get(x).equals("Variable")){
+                           if(tablaA.buscar(lex.get(x))!=null){
+                            c=2;
+                            type=tablaA.buscar(lex.get(x)).getTipo();
+                        }
+                        else{
+                            f2=true;
+                            System.out.println("Linea "+cont+"     Error, variable no declarada");
+                            c=5;
+                        }
+                    }
+                    else{
+                        f2=true;
+                        System.out.println("Linea "+cont+"     Error de sintaxis, se espera una variable");
+                        c=5;
+                     }
+                        break;
+                case 2:
+                    if(token.get(x).equals("Operador")){
+                        c=3;
+                    }
+                    else{
+                        f2=true;
+                        System.out.println("Linea "+cont+"      Error, se espera operador de decisión");
+                        c=5;
+                    }
+                    break;
+                case 3:
+                    if(!token.get(x).equals("Final")){
+                    switch(type){
+                        case "num":
+                            if(token.get(x).equals("Numero")){
+                                c=4;
+                            }
+                            else{
+                                c=5;
+                                f2=true;
+                                System.out.println("Linea "+cont+"      Error, diferentes tipos de dato");
+                            }
+                            break;
+                        case "cad":
+                            if(token.get(x).equals("Cadena")){
+                                c=4;
+                            }
+                            else{
+                                c=5;
+                                f2=true;
+                                System.out.println("Linea "+cont+"      Error, diferentes tipos de dato");
+                            }
+                            break;
+                        case "car":
+                            if(token.get(x).equals("Caracter")){
+                                c=4;
+                            }else{
+                                c=5;
+                                f2=true;
+                                System.out.println("Linea "+cont+"      Error, diferentes tipos de dato");
+                            }
+                            break;
+                        case "bool":
+                            if(token.get(x).equals("Booleano")){
+                                c=4;
+                            }
+                            else{
+                                c=5;
+                                f2=true;
+                                System.out.println("Linea "+cont+"      Error, diferentes tipos de dato");
+                            }
+                            break;
+                        default: 
+                            System.out.println("Linea "+cont+"       se espera una variable o tipo de dato");
+                            f2=true;
+                            c=5;
+                    }
+                    }
+                    else{
+                        f2=true;
+                        c=5;
+                        System.out.println("Linea "+cont+"     Se espera una variable o tipo de dato");
+                    }
+                    break;
+                case 4:
+                    if(token.get(x).equals("Final")){
+                        f1=true;
+                    }
+                    c=5;
+                    break;
+                case 5:
+                    f1=false;
+                    break;
+                default:
+                    f1=false;
+                    f2=true;
+            }
+            x++;    
+            }while(x<a);
+
+        if(f1==true){
+            System.out.println("aceptado");
+         }
+         else if(f2==false){
+             System.out.println("Linea "+cont+"     Error de sintaxis");
+         }
+        
+        }
+     
+     
+     
+     public static void des(int cont){
+
+      int a=token.size();
+      boolean j=false;
+      boolean h=false;
+
+      boolean a1 = false;
+      boolean a2 = false;
+      boolean a3 = false;
+      boolean a4 = false;
+      boolean a5 = false;
+      boolean a7 = false;
+      boolean a22 = false;
+      boolean a23 = false;
+      boolean a33 = false;
+      boolean a43 = false;
+      boolean a200 = false;
+      boolean a300 = false;
+      boolean a400 = false;
+      
+
+      int x=1;
+      int c=1;
+      String g="";
+      boolean k=false;
+
+
+      do{
+
+
+         switch(c){
+          case 1:
+            if(x==a){
+               k=false;
+            }
+            else if(token.get(x).equals("Parametro1")) c=2;
+            else if(token.get(x).equals("Final")){
+                c=9;
+                a5=true;
+            }
+            else c=9;
+
+
+            break;
+          case 2:
+              a1=true;
+            if(x==a){
+               k=false;
+            }
+            else if(token.get(x).equals("Variable")||token.get(x).equals("Cadena")||token.get(x).equals("Caracter")||token.get(x).equals("Numero")) c=3;
+            
+            else if(token.get(x).equals("Parametro2")){
+                c=9;
+                a4=true;
+            }
+
+            else if(token.get(x).equals("Final")){
+                c=9;
+
+            }
+            else c=9;
+            break;
+
+            
+            case 3:
+                a2=true;
+                a7=true;
+            if(x==a){
+               k=false;
+
+            }
+            else if(token.get(x).equals("Operador")){
+                c=4;
+            }
+            else if(token.get(x).equals("Final")||token.get(x).equals("Parametro2")){
+                c=9;
+                a33=true;
+            }
+            else c=9;
+            break;
+            
+            case 4:
+                a23=true;
+            if(x==a){
+               k=false;
+
+            }
+            else if(token.get(x).equals("Variable")||token.get(x).equals("Cadena")||token.get(x).equals("Caracter")||token.get(x).equals("Numero")) c=5;
+           
+            
+            
+            else if(token.get(x).equals("Final")||token.get(x).equals("Parametro2")){
+                c=9;
+                a43=true;
+            }
+            else c=9;
+            
+            
+
+
+            break;
+            
+            case 5:
+                a22=true;
+              
+            if(x==a){
+               k=false;
+
+            }
+            else if(token.get(x).equals("Parametro2")){
+                c=6;
+            }
+            else if(token.get(x).equals("Final")){
+                c=9;
+                a3=true;
+            }
+            else c=9;
+
+
+            break;
+
+              case 6:
+               a200=true;
+            if(x==a){
+               k=false;
+            }
+            else if(lex.get(x).equals("[")){
+                c=7;
+            }
+            else if(token.get(x).equals("Final")){
+                c=9;
+                a300=true;
+            }
+            else c=9;
+
+            break;
+
+            case 7:
+                a400=true;
+            if(x==a){
+               k=false;
+            }
+            else if(token.get(x).equals("Final")){
+                c=8;
+                j=true;
+            }
+            else c=9;
+
+            break;
+
+            case 8:
+            if(x==a){
+               k=true;
+            }
+            else c=9;
+
+            break;
+
+
+            case 9:
+            if(x==a){
+               k=false;
+            }
+            else c=9;
+
+            break;
+            default:
+               System.out.println("\nError de Sintaxis");
+            break;
+
+            }
+
+            if(k==false)g="error";
+            else if(k==true)g="Aceptar";
+
+
+            x++;
+            }while(x<=a);
+
+            if(k==false){
+                if (a5==true)System.out.println("Linea "+cont+ "     Error: No indico la desicion");
+                else if(a1==false) System.out.println("Linea "+cont+ "     Error: Ausencia de '(' ");
+                else if (a4==true)System.out.println("Linea "+cont+ "     Error: No agrego datos a comparar");
+                else if(a2==false)System.out.println("Linea "+cont+ "     Error: Primer dato de la comparacion no valido ");
+                else if(a33==true)System.out.println("Linea "+cont+ "     Error: Ausencia de operador para comparar ");
+                else if(a23==false)System.out.println("Linea "+cont+ "     Error en el simbolo de comparacion ");
+                else if(a43==true)System.out.println("Linea "+cont+ "     Error: Falta segundo elemento a comparar");
+                
+                else if(a22==false)System.out.println("Linea "+cont+ "     Error: Segundo dato de la comparacion no valido ");
+                else if (a3==true)System.out.println("Linea "+cont+ "     Error: Ausencia de ')' ");
+                else if (a200==false)System.out.println("Linea "+cont+ "     Error al declarar la desicion");
+                
+                else if(a300==true)System.out.println("Linea "+cont+ "     Error: Ausencia de simbolo [ ");
+                else if(a400==false)System.out.println("Linea "+cont+ "     Error: No se inicia el bloque ");
+                
+                
+                //else if (a1==true&&a2==true&&a3==true)System.out.println("Linea "+cont+ "     Error: Se espera otra variable ");
+               // System.out.println("Linea "+cont+ "     Error en la declaracion de variables ");
+            }
+            /*
+            if(k==true){
+                if(a7==true){
+                    if(tablaA.buscar(lex.get(2))==null)System.out.println("Linea "+cont+ "     Error: La variable no se encuentra en la tabla de simbolos");
+                            else consola+=(tablaA.buscar(lex.get(2)).val)+"\n";
+                }
+                else consola+=(lex.get(2)+"\n");
+            }
+*/
+    }
+
 
 }

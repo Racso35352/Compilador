@@ -1,10 +1,19 @@
+
 Si ( a <= b ) [ ;
+
 Si ( ) ;
+
 Sino ( k <= 23 ) ;
+
 Si ( h == ) ;
+
 Si ) ;
+
 Si ( c = D ) [ ;
-Si ( c >= D ) [
+
+Si ( c >= D ) [ 
+
 Si ( "hola" != "hola" ) [ ;
+
 Si ( "hola == 'H' ) [ ;
 Si ( "hola" == 'Hola' ) [ ;
