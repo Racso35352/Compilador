@@ -25,7 +25,7 @@ public class Nuevo_Compilador {
     public static int np=0;
     public static Automatas Auto=new Automatas();
     
-    
+    public static Ensamblador ensamblador=new Ensamblador();
    public static Lexico lex=new Lexico();
     /**
      * @param args the command line arguments
@@ -44,7 +44,7 @@ public class Nuevo_Compilador {
       Matcher mat;//Declaración del matcher
       //Cleación del nuevo archivo
       //String ori=Origen.getText();
-      String ori="p6";
+      String ori="p7";
       
       //String dest=Destino.getText();
       String dest="n";
@@ -194,6 +194,8 @@ public class Nuevo_Compilador {
       System.out.println("\n\t\tImpresion en consola");
       System.out.println(Auto.consola);
       
+      
+      ensamblador.empezar(Auto);
       ///////////////////////////////System.out.println(imp);
       /*
       int cc=variables.size();

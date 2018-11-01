@@ -1,6 +1,16 @@
 DEC num b = 8 ;
 DEC cad n ;
 
+
+
+DEC cad k = "buenos" ;
 Lee n ; 
 
 Imprime ( n ) ;
+
+
+
+
+
+Imprime ( k ) ;
+

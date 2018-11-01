@@ -65,5 +65,12 @@ public class TabS{
       
    }
    
+   public Nodo obtener(){
+   
+      Nodo linea=inicio;
+      
+      return inicio;
+   }
+   
 
 }
