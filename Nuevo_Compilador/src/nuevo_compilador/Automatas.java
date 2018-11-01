@@ -548,13 +548,13 @@ public class Automatas {
                         else{
                             f2=true;
                             System.out.println("Linea "+cont+"     Error, variable no declarada");
-                            c=5;
+                            c=6;
                         }
                     }
                     else{
                         f2=true;
                         System.out.println("Linea "+cont+"     Error de sintaxis, se espera una variable");
-                        c=5;
+                        c=6;
                      }
                         break;
                 case 2:
@@ -564,18 +564,18 @@ public class Automatas {
                     else{
                         f2=true;
                         System.out.println("Linea "+cont+"      Error, se espera operador de decisión");
-                        c=5;
+                        c=6;
                     }
                     break;
                 case 3:
-                    if(!token.get(x).equals("Final")){
+                    if(!token.get(x).equals("Final") && !token.get(x).equals("Variable")){
                     switch(type){
                         case "num":
                             if(token.get(x).equals("Numero")){
                                 c=4;
                             }
                             else{
-                                c=5;
+                                c=6;
                                 f2=true;
                                 System.out.println("Linea "+cont+"      Error, diferentes tipos de dato");
                             }
@@ -585,7 +585,7 @@ public class Automatas {
                                 c=4;
                             }
                             else{
-                                c=5;
+                                c=6;
                                 f2=true;
                                 System.out.println("Linea "+cont+"      Error, diferentes tipos de dato");
                             }
@@ -594,7 +594,7 @@ public class Automatas {
                             if(token.get(x).equals("Caracter")){
                                 c=4;
                             }else{
-                                c=5;
+                                c=6;
                                 f2=true;
                                 System.out.println("Linea "+cont+"      Error, diferentes tipos de dato");
                             }
@@ -604,7 +604,7 @@ public class Automatas {
                                 c=4;
                             }
                             else{
-                                c=5;
+                                c=6;
                                 f2=true;
                                 System.out.println("Linea "+cont+"      Error, diferentes tipos de dato");
                             }
@@ -612,22 +612,47 @@ public class Automatas {
                         default: 
                             System.out.println("Linea "+cont+"       se espera una variable o tipo de dato");
                             f2=true;
-                            c=5;
+                            c=6;
                     }
+                    }
+                    else if(token.get(x).equals("Variable")){
+                        if(tablaA.buscar(lex.get(x)).getTipo().equals(type)){
+                            c=4;
+                        }
+                        else{
+                            c=6;
+                            f2=true;
+                            System.out.println("Linea "+cont+"      Error, diferentes tipos de dato");
+                        }
                     }
                     else{
                         f2=true;
-                        c=5;
+                        c=6;
                         System.out.println("Linea "+cont+"     Se espera una variable o tipo de dato");
                     }
                     break;
                 case 4:
+                    if(lex.get(x).equals("+") || lex.get(x).equals("-")){
+                        c=5;
+                    }
+                    else if(!token.get(x).equals("Final")){
+                        f2=true;
+                        c=6;
+                        System.out.println("Linea "+cont+"      Error, operador de conteo invalido, se espera '-' o '+'");
+                    }
+                    else{
+                        f2=true;
+                        c=6;
+                        System.out.println("Linea "+cont+"      Error, falta operador de conteo");
+                    }
+                    break;
+                case 5:
                     if(token.get(x).equals("Final")){
                         f1=true;
                     }
-                    c=5;
+                    c=6;
                     break;
-                case 5:
+                case 6:
                     f1=false;
                     break;
                 default:
@@ -638,7 +663,7 @@ public class Automatas {
             }while(x<a);
 
         if(f1==true){
-            System.out.println("aceptado");
+            
          }
          else if(f2==false){
              System.out.println("Linea "+cont+"     Error de sintaxis");

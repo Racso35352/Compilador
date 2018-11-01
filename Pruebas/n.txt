@@ -8,3 +8,14 @@ Si ( c >= D ) [
 Si ( "hola" != "hola" ) [ ;
 Si ( "hola == 'H' ) [ ;
 Si ( "hola" == 'Hola' ) [ ;
+Si ( "hola" == h ) [ ;
+DEC num a = 0 ;
+DEC bool b = Verdadero ;
+DEC num c ;
+Hacer a < 5 ;
+Hacer < 3 ;
+Hacer a == 10 - ;
+Hacer a == b ;
+Hacer a <= c - ;
+Hacer a ;
+Hacer a > 2 * ;
