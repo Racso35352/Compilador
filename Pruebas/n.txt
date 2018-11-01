@@ -19,3 +19,4 @@ Hacer a == b ;
 Hacer a <= c - ;
 Hacer a ;
 Hacer a > 2 * ;
+Nuevo ;
