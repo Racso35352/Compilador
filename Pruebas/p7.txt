@@ -1,0 +1,6 @@
+DEC num b = 8 ;
+DEC cad n ;
+
+Lee n ; 
+
+Imprime ( n ) ;
