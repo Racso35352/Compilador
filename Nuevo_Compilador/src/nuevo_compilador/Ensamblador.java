@@ -24,7 +24,7 @@ public class Ensamblador {
     
     public static void empezar(Automatas auto) {
         try{
-         fichero = new FileWriter("C:\\Users\\Oscar\\Desktop\\masm\\Ens.asm");
+         fichero = new FileWriter("C:\\Users\\Oscar\\Desktop\\masm\\Ens.asm"); //Aqui acomodale tu ruta a donde este tu carpeta masm, tambien acuerdate de instalar el DosBox, si no lo tienes dime y te lo paso
          pw = new PrintWriter(fichero);
          
          
@@ -78,6 +78,13 @@ public class Ensamblador {
     
     
     public static void datos(Automatas auto){
+        
+        
+        
+        //Probablemente aqui tambien le debas mover si es que utilizas instrucciones del tipo "n1 db 61,?,61 dup(?)"
+        //Para leer creo que sera necesario pero como tu veas, si es asi aqui tambien se va a hacer un buen desmadre
+        //Tu ve como lo haces para que te sea mas facil
+        
         Nodo linea=auto.tablaA.obtener();
         char n=34;
         String npal=linea.val;
@@ -104,7 +111,9 @@ public class Ensamblador {
         if(linea!=null){
             while(linea!=null){
                 
-                
+                //Aqui es donde le debes de mover
+                //Mi idea era leer el archivo depurado y tomar los casos de acuerdo a las instrucciones ecesarias en ensamblador
+                //Al final de cada instruccion debes ponerle un \n para que haga el salto de linea en ensablador 
             cc+="mov ah,2\n" +
 "mov bh,0\n" +
 "mov dh,"+cont+"\n" +
