@@ -81,12 +81,29 @@ public class Ensamblador {
     public static void datos(Automatas auto){
         
         Nodo linea=auto.tablaA.obtener();  //Obtiene el primer nodo de la tabla de simbolos
-        
+
         if(linea!=null){
             while(linea!=null){
                 if(linea.lect.equals("S")){ //Si la variable es de lectura
-                    
+                    if(linea.tipo.equals("cad")){
+                        cadDatos+=linea.nom+" DB 61,?,61 DUP(?)\n";
+                    }
+                    else if(linea.tipo.equals("num")){
+                        
+                    }
                 }
+                else{
+                    if(linea.tipo.equals("cad")){
+                        String cad=linea.val;
+                        String cad1=cad.replace((char)34,(char)0);
+                        cadDatos+=linea.nom+" DB '"+cad1+"$'\n";
+                        
+                    }
+                    else if(linea.tipo.equals("num")){
+                        
+                    }
+                }
+                /*
                 npal=linea.val;
                 if(linea.tipo.equals("cad")){
                     String np[]=npal.split("\"");
@@ -94,6 +111,7 @@ public class Ensamblador {
                     for(int x=0;x<np.length;x++)npal+=np[x];
                 }
             cadDatos+=linea.nom+" db "+n+npal+"$"+n+"\n";
+            */
             linea=linea.pointer;
             }
         }
@@ -103,6 +121,7 @@ public class Ensamblador {
         //Tu ve como lo haces para que te sea mas facil
         
         //Nodo linea=auto.tablaA.obtener();  //Obtiene el primer nodo de la tabla de simbolos
+        /*
         char n=34;  
         String npal=linea.val;
         if(linea!=null){
@@ -117,72 +136,80 @@ public class Ensamblador {
             linea=linea.pointer;
             }
         }
+*/
         
         }
         
     
     public static void codigo(Automatas auto){
-        Nodo linea=auto.tablaA.obtener();
-        try{
-            File archivo = new File ("C:\\Users\\Dulce\\Documents\\Github\\Compilador\\Pruebas\\dest.txt");
+        Nodo linea;
+        int cont =0;
+        
+            File archivo = new File ("C:\\Users\\Dulce\\Documents\\Github\\Compilador\\Pruebas\\n.txt");
+            String line;
+            try{
             FileReader fr = new FileReader (archivo);
             BufferedReader br = new BufferedReader(fr);
             
-            
-            if(linea!=null){
-                String line;
+           
                 while((line=br.readLine())!= null){
-                    StringTokenizer st = new StringTokenizer (line);
+                    StringTokenizer st = new StringTokenizer(line);
                     String pal=st.nextToken();//Almacena la instrucción
-                    String var=st.nextToken();//Almacena el nombre de la variable
-                    int nbytes;
-                    linea=auto.tablaA.buscar(var); //Busca la variable en la tabla de simbolos
-                    String tipo =linea.tipo; //Obtiene el tipo de dato de la variable, esto es importante para saber el nbits que ocupa en memoria 
-                    switch(pal){
-                        case "Lee":
-                            if(tipo=="cad"){
+                    System.out.println(line);
+
+                    //int nbytes;
+                    if(!pal.equals("DEC")){
+                    //linea=auto.tablaA.buscar(var); //Busca la variable en la tabla de simbolos
+                    //String tipo =linea.tipo; //Obtiene el tipo de dato de la variable, esto es importante para saber el nbits que ocupa en memoria 
+                    if(pal.equals("Lee")){
+                        String var=st.nextToken();
+                        linea=auto.tablaA.buscar(var);
+                        String tipo=linea.tipo;
+                        if(tipo.equals("cad")){
                                 cc+="lea dx,"+var+"\n"+
                                     "mov ah,0ah\n"+
                                     "int 21h\n";
+                                cont++;
                             }
-                            if(tipo=="num"){
+                            if(tipo.equals("num")){
                                 
                             }
-                            break;
-                        case "Imprime":
-                            if(tipo=="cad"){
-                                if(linea.lect.equals("S")){     //Si es de lectura entonces tiene una estructura de DB 61,?,61 DUP(?)
-                                    while(cont<=61){
-                                        cc+="mov ah,2\n" +
-"mov bh,0\n" +
-"mov dh,"+cont+"\n" +
-"mov dl,35\n" +
-"int 10h\n" +
-"\n" +
-"LEA dx,"+var+"\n" +
-"mov ah,09\n" +
-"int 21H\n";
-            cont ++;
-                                    }
-                                }
-                                else{   //este ya esta definido en el segmento de datos
+                    }
+                    else if(pal.equals("Imprime")){
+                        st.nextToken();
+                        String var=st.nextToken();
+                        linea=auto.tablaA.buscar(var);
+                        String tipo=linea.tipo;
+                        if(linea.lect.equals("S")){
+                            if(tipo.equals("cad")){
+                                cc+="lea bx,"+var+"\n"+
+                                    "inc bx\n"+
+                                    "mov cx,[bx]\n"+
+                                    "mov ch,0\n"+
+                                    "L"+var+cont+":\n"+
+                                    "inc bx\n"+
+                                    "mov dl,[bx]\n"+
+                                    "mov ah,2\n"+
+                                    "int 21h\n"+
+                                    "loop L"+var+cont+"\n";       
+                                cont++;
+                            }
+                        }
+                        else{
+                            if(tipo.equals("cad")){
                                     cc+="lea dx,"+var+"\n"+
                                         "mov ah,9\n"+
                                         "int 21h\n";
-                                }
+                                    cont++;
                             }
-                            break;
+                        }
                     }
-                //Aqui es donde le debes de mover
-                //Mi idea era leer el archivo depurado y tomar los casos de acuerdo a las instrucciones necesarias en ensamblador
-                //Al final de cada instruccion debes ponerle un \n para que haga el salto de linea en ensamblador 
-            //linea=linea.pointer;
-            }
-        }
-        
-        }
-        catch(Exception e){
-  
+                    }
+            }//while
+                System.out.println(cont);
+        }//try
+        catch(IOException e){
+            
         }
     }
     
