@@ -19,13 +19,16 @@ public class Ensamblador {
     public static String cc="";
     public static String cadExtra="";
     public static int cont =1;
+    public static int s =1;
+    public static int ss =25;
+    
     
     public static FileWriter fichero = null;
     public static PrintWriter pw = null;
     
     public static void empezar(Automatas auto) {
         try{
-         fichero = new FileWriter("C:\\Users\\Dulce\\Documents\\Github\\Compilador\\masm\\Ens.asm"); //Aqui acomodale tu ruta a donde este tu carpeta masm, tambien acuerdate de instalar el DosBox, si no lo tienes dime y te lo paso
+         fichero = new FileWriter("C:\\Users\\Oscar\\Documents\\Github\\Compilador\\masm\\Ens.asm"); //Aqui acomodale tu ruta a donde este tu carpeta masm, tambien acuerdate de instalar el DosBox, si no lo tienes dime y te lo paso
          pw = new PrintWriter(fichero);
          
          
@@ -86,7 +89,9 @@ public class Ensamblador {
             while(linea!=null){
                 if(linea.lect.equals("S")){ //Si la variable es de lectura
                     if(linea.tipo.equals("cad")){
+                        
                         cadDatos+=linea.nom+" DB 61,?,61 DUP(?)\n";
+                       
                     }
                     else if(linea.tipo.equals("num")){
                         
@@ -100,7 +105,9 @@ public class Ensamblador {
                         
                     }
                     else if(linea.tipo.equals("num")){
+                        String cad=linea.val;
                         
+                        cadDatos+=linea.nom+" DB '"+cad+"$'\n";
                     }
                 }
                 /*
@@ -145,7 +152,7 @@ public class Ensamblador {
         Nodo linea;
         int cont =0;
         
-            File archivo = new File ("C:\\Users\\Dulce\\Documents\\Github\\Compilador\\Pruebas\\n.txt");
+            File archivo = new File ("C:\\Users\\Oscar\\Documents\\Github\\Compilador\\Pruebas\\n.txt");
             String line;
             try{
             FileReader fr = new FileReader (archivo);
@@ -155,7 +162,7 @@ public class Ensamblador {
                 while((line=br.readLine())!= null){
                     StringTokenizer st = new StringTokenizer(line);
                     String pal=st.nextToken();//Almacena la instrucción
-                    System.out.println(line);
+                    //System.out.println(line);
 
                     //int nbytes;
                     if(!pal.equals("DEC")){
@@ -166,6 +173,12 @@ public class Ensamblador {
                         linea=auto.tablaA.buscar(var);
                         String tipo=linea.tipo;
                         if(tipo.equals("cad")){
+                            cc+="mov ah,2\n"+
+	"mov bh,0\n"+
+	"mov dh,"+s+"\n"+
+	"mov dl,"+ss+"\n"+
+	"int 10h\n";
+        s++;
                                 cc+="lea dx,"+var+"\n"+
                                     "mov ah,0ah\n"+
                                     "int 21h\n";
@@ -182,6 +195,12 @@ public class Ensamblador {
                         String tipo=linea.tipo;
                         if(linea.lect.equals("S")){
                             if(tipo.equals("cad")){
+                                                            cc+="mov ah,2\n"+
+	"mov bh,0\n"+
+	"mov dh,"+s+"\n"+
+	"mov dl,"+ss+"\n"+
+	"int 10h\n";
+        s++;
                                 cc+="lea bx,"+var+"\n"+
                                     "inc bx\n"+
                                     "mov cx,[bx]\n"+
@@ -197,6 +216,24 @@ public class Ensamblador {
                         }
                         else{
                             if(tipo.equals("cad")){
+                                                            cc+="mov ah,2\n"+
+	"mov bh,0\n"+
+	"mov dh,"+s+"\n"+
+	"mov dl,"+(ss-1)+"\n"+
+	"int 10h\n";
+        s++;
+                                    cc+="lea dx,"+var+"\n"+
+                                        "mov ah,9\n"+
+                                        "int 21h\n";
+                                    cont++;
+                            }
+                            if(tipo.equals("num")){
+                                                            cc+="mov ah,2\n"+
+	"mov bh,0\n"+
+	"mov dh,"+s+"\n"+
+	"mov dl,"+(ss)+"\n"+
+	"int 10h\n";
+        s++;
                                     cc+="lea dx,"+var+"\n"+
                                         "mov ah,9\n"+
                                         "int 21h\n";
@@ -206,7 +243,7 @@ public class Ensamblador {
                     }
                     }
             }//while
-                System.out.println(cont);
+                //System.out.println(cont);
         }//try
         catch(IOException e){
             

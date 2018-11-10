@@ -19,6 +19,8 @@ public class Automatas {
     public static int f=0;
     public static int e=0;
     public static List<String> token = new ArrayList<String>();
+    
+    public static boolean Ensamblar=true;
 
     public static List<String> lex = new ArrayList<String>();
     public static TabS tablaA= new TabS();
@@ -36,11 +38,15 @@ public class Automatas {
             else if(tokens.get(0).equals("Hacer"))e=4;            
             else if(tokens.get(0).equals("Desicion"))e=5;
 
-            else System.out.println("Linea "+cont+ "     Error en palabra reservada ");
+            else {
+                System.out.println("Linea "+cont+ "     Error en palabra reservada ");
+                Ensamblar=false;
+            }
 
         }
         else{
             System.out.println("Linea "+cont+ "     Error de termino de linea, ausencia de ; ");
+            Ensamblar=false;
         }
 
 
@@ -290,6 +296,7 @@ public class Automatas {
             }while(x<=a);
 
             if(k==false){
+                Ensamblar=false;
                 if (a5==true)System.out.println("Linea "+cont+ "     Error: No agrego tipo de dato");
                 else if(a1==false) System.out.println("Linea "+cont+ "     Error en el tipo de dato ");
                 else if (a1==true&&a4==true)System.out.println("Linea "+cont+ "     Error: No agrego nombre de variable");
@@ -304,15 +311,24 @@ public class Automatas {
                     for(int m=0;m<a;m++){
                         if(token.get(m).equals("Variable")){
                             if(tablaA.buscar(lex.get(m))==null)tablaA.agregar(lex.get(m),lex.get(1),"0","N");
-                            else System.err.println("Linea "+cont+ "     Variable ya declarada");
+                            else {
+                                System.err.println("Linea "+cont+ "     Variable ya declarada");
+                                Ensamblar=false;
+                            }
                         }
                     }
                 }
 
                 if(h==true){
-                    if(btipo==false)System.out.println("Linea "+cont+ "     Error: Tipo de variable incorrecto ");
+                    if(btipo==false){
+                        Ensamblar=false;
+                        System.out.println("Linea "+cont+ "     Error: Tipo de variable incorrecto ");
+                    }
                     else if(tablaA.buscar(lex.get(2))==null)tablaA.agregar(lex.get(2),lex.get(1),lex.get(4),"N");
-                    else System.err.println("Linea "+cont+ "     Variable ya declarada");
+                    else {
+                        Ensamblar=false;
+                        System.err.println("Linea "+cont+ "     Variable ya declarada");
+                    }
                 }
             }
     }
@@ -452,6 +468,7 @@ public class Automatas {
             }while(x<=a);
 
             if(k==false){
+                Ensamblar=false;
                 if (a5==true)System.out.println("Linea "+cont+ "     Error al indicar la cadena");
                 else if(a1==false) System.out.println("Linea "+cont+ "     Error: Ausencia de '(' ");
                 else if (a4==true)System.out.println("Linea "+cont+ "     Error: No agrego cadena a imprimir");
@@ -462,7 +479,10 @@ public class Automatas {
             }
             if(k==true){
                 if(a7==true){
-                    if(tablaA.buscar(lex.get(2))==null)System.out.println("Linea "+cont+ "     Error: La variable no se encuentra en la tabla de simbolos");
+                    if(tablaA.buscar(lex.get(2))==null){
+                        Ensamblar=false;
+                        System.out.println("Linea "+cont+ "     Error: La variable no se encuentra en la tabla de simbolos");
+                    }
                             else consola+=(tablaA.buscar(lex.get(2)).val)+"\n";
                 }
                 else consola+=(lex.get(2)+"\n");
@@ -487,12 +507,14 @@ public class Automatas {
                          else{
                              f2=true;
                              System.out.println("Linea "+cont+"     Error, variable no declarada");
+                             Ensamblar=false;
                              c=3;
                          }
                      }
                      else{
                          f2=true;
                          System.out.println("Linea "+cont+"     Error de sintaxis, se espera una variable");
+                         Ensamblar=false;
                          c=3;
                      }
                      break;
@@ -524,6 +546,7 @@ public class Automatas {
          }
          else if(f2==false){
              System.out.println("Linea "+cont+"     Error de sintaxis");
+             Ensamblar=false;
          }
      }
      
@@ -548,12 +571,14 @@ public class Automatas {
                         else{
                             f2=true;
                             System.out.println("Linea "+cont+"     Error, variable no declarada");
+                            Ensamblar=false;
                             c=6;
                         }
                     }
                     else{
                         f2=true;
                         System.out.println("Linea "+cont+"     Error de sintaxis, se espera una variable");
+                        Ensamblar=false;
                         c=6;
                      }
                         break;
@@ -564,6 +589,7 @@ public class Automatas {
                     else{
                         f2=true;
                         System.out.println("Linea "+cont+"      Error, se espera operador de decisión");
+                        Ensamblar=false;
                         c=6;
                     }
                     break;
@@ -578,6 +604,7 @@ public class Automatas {
                                 c=6;
                                 f2=true;
                                 System.out.println("Linea "+cont+"      Error, diferentes tipos de dato");
+                                Ensamblar=false;
                             }
                             break;
                         case "cad":
@@ -588,6 +615,7 @@ public class Automatas {
                                 c=6;
                                 f2=true;
                                 System.out.println("Linea "+cont+"      Error, diferentes tipos de dato");
+                                Ensamblar=false;
                             }
                             break;
                         case "car":
@@ -597,6 +625,7 @@ public class Automatas {
                                 c=6;
                                 f2=true;
                                 System.out.println("Linea "+cont+"      Error, diferentes tipos de dato");
+                                Ensamblar=false;
                             }
                             break;
                         case "bool":
@@ -607,10 +636,12 @@ public class Automatas {
                                 c=6;
                                 f2=true;
                                 System.out.println("Linea "+cont+"      Error, diferentes tipos de dato");
+                                Ensamblar=false;
                             }
                             break;
                         default: 
                             System.out.println("Linea "+cont+"       se espera una variable o tipo de dato");
+                            Ensamblar=false;
                             f2=true;
                             c=6;
                     }
@@ -623,12 +654,14 @@ public class Automatas {
                             c=6;
                             f2=true;
                             System.out.println("Linea "+cont+"      Error, diferentes tipos de dato");
+                            Ensamblar=false;
                         }
                     }
                     else{
                         f2=true;
                         c=6;
                         System.out.println("Linea "+cont+"     Se espera una variable o tipo de dato");
+                        Ensamblar=false;
                     }
                     break;
                 case 4:
@@ -639,11 +672,13 @@ public class Automatas {
                         f2=true;
                         c=6;
                         System.out.println("Linea "+cont+"      Error, operador de conteo invalido, se espera '-' o '+'");
+                        Ensamblar=false;
                     }
                     else{
                         f2=true;
                         c=6;
                         System.out.println("Linea "+cont+"      Error, falta operador de conteo");
+                        Ensamblar=false;
                     }
                     break;
                 case 5:
@@ -667,6 +702,7 @@ public class Automatas {
          }
          else if(f2==false){
              System.out.println("Linea "+cont+"     Error de sintaxis");
+             Ensamblar=false;
          }
         
         }
@@ -853,6 +889,7 @@ public class Automatas {
             }while(x<=a);
 
             if(k==false){
+                Ensamblar=false;
                 if (a5==true)System.out.println("Linea "+cont+ "     Error: No indico la desicion");
                 else if(a1==false) System.out.println("Linea "+cont+ "     Error: Ausencia de '(' ");
                 else if (a4==true)System.out.println("Linea "+cont+ "     Error: No agrego datos a comparar");
@@ -882,6 +919,9 @@ public class Automatas {
             }
 */
     }
+  public static boolean Ens(){
+      return Ensamblar;
+  }
 
 
 }
