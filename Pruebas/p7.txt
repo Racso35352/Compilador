@@ -13,3 +13,8 @@ Imprime ( k ) ;
 Lee  n  ;
 Imprime ( b ) ;
 Imprime ( n ) ;
+
+DEC num a ;
+
+
+a = a + b * c ;

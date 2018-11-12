@@ -165,6 +165,7 @@ public class Ensamblador {
                     //System.out.println(line);
 
                     //int nbytes;
+                    
                     if(!pal.equals("DEC")){
                     //linea=auto.tablaA.buscar(var); //Busca la variable en la tabla de simbolos
                     //String tipo =linea.tipo; //Obtiene el tipo de dato de la variable, esto es importante para saber el nbits que ocupa en memoria 
@@ -241,6 +242,8 @@ public class Ensamblador {
                             }
                         }
                     }
+                    
+                        
                     }
             }//while
                 //System.out.println(cont);

@@ -21,7 +21,7 @@ public class Automatas {
     public static List<String> token = new ArrayList<String>();
     
     public static boolean Ensamblar=true;
-
+    public static Semantico seman= new Semantico();
     public static List<String> lex = new ArrayList<String>();
     public static TabS tablaA= new TabS();
 
@@ -36,7 +36,8 @@ public class Automatas {
             else if(tokens.get(0).equals("Imprime"))e=2;
             else if(tokens.get(0).equals("Lectura"))e=3;
             else if(tokens.get(0).equals("Hacer"))e=4;            
-            else if(tokens.get(0).equals("Desicion"))e=5;
+            else if(tokens.get(0).equals("Desicion"))e=5;         
+            else if(tokens.get(0).equals("Variable"))e=6;
 
             else {
                 System.out.println("Linea "+cont+ "     Error en palabra reservada ");
@@ -55,6 +56,7 @@ public class Automatas {
         if(e==3)lectura(cont);
         if(e==4)ciclo(cont);
         if(e==5)des(cont);
+        if(e==6)vari(cont,lex,token);
 
 
     }
@@ -919,6 +921,14 @@ public class Automatas {
             }
 */
     }
+     
+    
+    public static void vari(int cont, List<String> lex,List<String> token){
+        
+        boolean x=seman.revisar(cont,lex,token);
+        
+    }
+
   public static boolean Ens(){
       return Ensamblar;
   }
