@@ -15,7 +15,7 @@ import java.util.StringTokenizer;
  */
 public class Semantico {
     public static String tabla="Pila\t\t\tEntrada\t\t\tSalida\n";
-    
+    public static boolean l=true;
     public static Lexico le=new Lexico();
     
     public static boolean revisar(int cont, List<String> lex,List<String> token){
@@ -132,6 +132,11 @@ public class Semantico {
             
         s=Integer.parseInt(pil.get(pil.size()-1));
             a=calcA(entrada.get(0));
+            if(a==9){
+                l=false;
+                ac="error";
+            }
+            else{
             j=pil.size();
             k=entrada.size();
             
@@ -161,7 +166,11 @@ public class Semantico {
             else pil.add(accion[s][a].charAt(1)+"");
             entrada.remove(0);            
             a=calcA(entrada.get(0));
-            
+            if(a==9){
+                ac="error";
+                l=false;
+            }
+            else ;
             }
             
             else if(accion[s][a].charAt(0)=='r'){
@@ -202,14 +211,19 @@ public class Semantico {
             
             
             //System.out.println(""+s + a );
-           
+            }
     }    
          while(!ac.equals("error") ) ;
         
-        
-        p=accion[s][a].charAt(0);
+        if(l==true){
+            p=accion[s][a].charAt(0);
         if(p=='a') System.out.println(tabla);
         if(p=='e') System.out.println("Linea "+cont+ "     Error: Semantica de la expresion incorrecta ");
+        
+        }
+        else {
+            System.out.println("Linea "+cont+ "     Error: Caracteeres no permitidos ");
+        }
         
         
         return x;
@@ -224,6 +238,7 @@ public class Semantico {
         else if(pal.equals("("))y=3;
         else if(pal.equals(")"))y=4;
         else if(pal.equals(";"))y=5;
+        else y=9;
                 
         return y;
     }

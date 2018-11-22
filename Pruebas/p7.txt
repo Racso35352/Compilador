@@ -17,4 +17,4 @@ Imprime ( n ) ;
 DEC num a ;
 
 
-a = a + b * c ;
+a = a + ( b * c ) ;

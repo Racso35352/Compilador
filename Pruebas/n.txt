@@ -1,12 +1,2 @@
-DEC num b = 8 ;
-DEC cad n ;
-DEC cad k = "Hola" ;
-DEC num p = 17 ;
-Lee n ;
-Imprime ( n ) ;
-Imprime ( k ) ;
-Lee n ;
-Imprime ( b ) ;
-Imprime ( n ) ;
 DEC num a ;
-a = a + b * c ;
+a = a + b * c + j ;

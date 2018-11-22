@@ -1,0 +1,5 @@
+
+DEC num a ;
+
+
+a = a +  b * c + j  ;

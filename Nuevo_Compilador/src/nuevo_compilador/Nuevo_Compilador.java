@@ -44,7 +44,7 @@ public class Nuevo_Compilador {
       Matcher mat;//Declaración del matcher
       //Cleación del nuevo archivo
       //String ori=Origen.getText();
-      String ori="p7";
+      String ori="p8";
       
       //String dest=Destino.getText();
       String dest="n";
