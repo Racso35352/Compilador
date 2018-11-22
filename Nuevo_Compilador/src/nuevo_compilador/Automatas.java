@@ -926,6 +926,13 @@ public class Automatas {
     public static void vari(int cont, List<String> lex,List<String> token){
         
         boolean x=seman.revisar(cont,lex,token);
+        if(x==true){
+            System.out.println("Si");
+            seman.hacer(cont,lex,token,tablaA);
+        }
+        else {   
+            System.out.println("No");
+        }
         
     }
 

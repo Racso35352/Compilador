@@ -17,6 +17,7 @@ public class Semantico {
     public static String tabla="Pila\t\t\tEntrada\t\t\tSalida\n";
     public static boolean l=true;
     public static Lexico le=new Lexico();
+    public static         int o=1;
     
     public static boolean revisar(int cont, List<String> lex,List<String> token){
         boolean x=false;
@@ -217,12 +218,15 @@ public class Semantico {
         
         if(l==true){
             p=accion[s][a].charAt(0);
-        if(p=='a') System.out.println(tabla);
+        if(p=='a') {
+            //System.out.println(tabla);
+            x=true;
+        }
         if(p=='e') System.out.println("Linea "+cont+ "     Error: Semantica de la expresion incorrecta ");
         
         }
         else {
-            System.out.println("Linea "+cont+ "     Error: Caracteeres no permitidos ");
+            System.out.println("Linea "+cont+ "     Error: Caracteres no permitidos ");
         }
         
         
@@ -258,7 +262,201 @@ public class Semantico {
         return tabla;
     }
     
+    public static void hacer(int cont,List<String> lex,List<String> token,TabS tablaA){
+        
+        boolean l=true;
+        
+        int tam=lex.size();
+        for(int a=0;a<tam;a++){
+            if(le.revisar(lex.get(a)).equals("Variable")){
+                if(tablaA.buscar(lex.get(a))==null){
+                    System.out.println("Linea "+cont+ "     Error: La variable no se encuentra en la tabla de simbolos");
+                    l=false;
+                }
+                else{
+                    if(a>=2&&tablaA.buscar(lex.get(a))!=null){
+                    lex.set(a,(tablaA.buscar(lex.get(a)).val));
+                }       
+                }
+            }
+        }
+        
+        if(l==true){
+        for(int a=0;a<tam;a++){
+            System.out.print(" "+lex.get(a));
+        }
+        
+        }
+        
+           do{            
+        int hay=0;
+        int hay2=0;
+        
+        for(int a=0;a<tam;a++){
+            if((lex.get(a)).equals("(")){
+                hay++;
+                if((lex.get(a+2)).equals(")")) {
+                    lex=unopar(tam,a+1,lex);
+                    tam=lex.size();                    
+                }
+                else {
+                    
+                    lex=recur(tam,a+1,lex);
+                    tam=lex.size();
+                }
+            }
+            
+        }
+        
+        
+        if(hay==0&&lex.size()>4){
+             
+            tam=lex.size();
+        for(int a=0;a<tam;a++){
+            if(lex.get(a).equals("*")){
+                lex=multi(tam,a,lex);
+                    tam=lex.size();
+                    a--;
+            }
+        }
+        for(int a=0;a<tam;a++){
+            if(lex.get(a).equals("+")){
+                lex=suma(tam,a,lex);
+                    tam=lex.size();
+                    a--;
+            }
+        }
+         
+        }
+            
+            /*
+        tam=lex.size();
+        for(int a=0;a<tam-1;a++){
+           
+            if(lex.get(a+1).equals("*")&&!lex.get(a).equals("(")&&!lex.get(a+2).equals("(")){
+                    lex=multi(tam,a+1,lex);
+                    tam=lex.size();
+                     hay2++;
+                     
+        System.out.println("Si entra"+ hay2+ lex.get(a+1));
+        System.out.println(" ");
+        for(int c=0;c<tam;c++){
+            System.out.print(" "+lex.get(c));
+        }
+                    a--;
+                }
+        }
+        }
+        System.out.println(" ");
+        for(int a=0;a<tam;a++){
+            System.out.print(" "+lex.get(a));
+        }
+        if(hay2==0&&lex.size()>4){
+                
+            
+        tam=lex.size();
+        for(int a=0;a<tam-1;a++){
+            
+            if(lex.get(a+1).equals("+")&&!lex.get(a).equals("(")&&!lex.get(a+2).equals("(")){
+                
+                    lex=suma(tam,a+1,lex);
+                    tam=lex.size();
+                    a--;
+                }
+            
+        }
+        }
+        */
+        
+           }while(lex.size()>4);
+        
+        tam=lex.size();
+        System.out.println(" ");
+        for(int a=0;a<tam;a++){
+            System.out.print(" "+lex.get(a));
+        }
+        
+        tablaA.buscar(lex.get(0)).setVal(""+lex.get(2));
+        
+    }
+    
+    public static List<String> unopar(int tam,int b, List<String> lex){
+        List<String> nueva = new ArrayList<String>();
+            for(int a=0;a<(b-1);a++){
+                nueva.add(lex.get(a));
+            }
+            nueva.add(lex.get(b));
+            for(int a=b+2;a<tam;a++){
+                nueva.add(lex.get(a));
+            }
+        return nueva;
+    }
     
     
+    public static List<String> recur (int tam,int b, List<String> lex){
+
+                
+            List<String> nueva = new ArrayList<String>();
+            if(lex.get(b).equals("(")){
+                
+                lex=recur(tam,b+1,lex);
+                    tam=lex.size();
+            }
+            
+                else if(lex.get(b+1).equals("+")&&!lex.get(b).equals("(")&&!lex.get(b+2).equals("(")){
+                    lex=suma(tam,b+1,lex);
+                    tam=lex.size();
+                    
+                    
+                }
+                else if(lex.get(b+1).equals("*")&&!lex.get(b).equals("(")&&!lex.get(b+2).equals("(")){
+                    lex=multi(tam,b+1,lex);
+                    tam=lex.size();
+                    
+                }
+            
+            else ;
+            for(int a=0;a<tam;a++){
+                nueva.add(lex.get(a));
+            }
+        return nueva;
+    }
+
+
+    public static List<String> suma (int tam,int b, List<String> lex){
+        List<String> nueva = new ArrayList<String>();
+        int n1=Integer.parseInt(lex.get(b-1));
+        int n2=Integer.parseInt(lex.get(b+1));
+        int n3=n1+n2;
+        
+        for(int a=0;a<(b-1);a++){
+                nueva.add(lex.get(a));
+            }
+            nueva.add(n3+"");
+            for(int a=b+2;a<tam;a++){
+                nueva.add(lex.get(a));
+            }
+            
+             
+        
+    return nueva;
+}
     
+  public static List<String> multi (int tam,int b, List<String> lex){
+List<String> nueva = new ArrayList<String>();
+        int n1=Integer.parseInt(lex.get(b-1));
+        int n2=Integer.parseInt(lex.get(b+1));
+        int n3=n1*n2;
+        
+        for(int a=0;a<(b-1);a++){
+                nueva.add(lex.get(a));
+            }
+            nueva.add(n3+"");
+            for(int a=b+2;a<tam;a++){
+                nueva.add(lex.get(a));
+            }
+        
+    return nueva;
+}
+  
 }

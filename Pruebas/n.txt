@@ -1,2 +1,9 @@
-DEC num a ;
-a = a + b * c + j ;
+DEC num a = 7 ;
+DEC num b = 16 ;
+DEC num c = 2 ;
+DEC num x ;
+DEC num y ;
+DEC num z ;
+x = a + ( ( b + b ) * ( c ) ) + ( ( b ) + ( c * a ) ) * c ;
+y = ( b * c * c * a * ( a + c ) + ( c * a ) ) ;
+z = b + c * ( a ) ;

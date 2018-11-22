@@ -2,7 +2,12 @@ pila segment para stack 'stack'
 db 1000 dup(?)
 pila ends
 datos segment para public 'data'
-a DB '0$'
+a DB '7$'
+b DB '16$'
+c DB '2$'
+x DB '131$'
+y DB '4046$'
+z DB '30$'
 datos ends
 extra segment para public 'data'
 extra ends
