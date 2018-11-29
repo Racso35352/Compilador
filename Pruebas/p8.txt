@@ -8,8 +8,10 @@ DEC num x ;
 
 DEC num y ;
 
-
 DEC num z ;
+
+
+DEC num k ;
 
 x = a + ( ( b + b ) * ( c ) ) + ( ( b ) + ( c * a ) ) * c  ;
 
@@ -19,3 +21,6 @@ y = ( b * c * c * a * ( a + c ) + ( c * a ) )  ;
 
 
 z = b + c * ( a )  ;
+
+k = b * c + ( a * a + b )  ;
+

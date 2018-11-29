@@ -395,7 +395,16 @@ public class Semantico {
     
     public static List<String> recur (int tam,int b, List<String> lex){
 
+                boolean u =false;
                 
+                for(int a=b;a<tam;a++){
+                if(lex.get(a).equals("*")){
+                    u=true;
+                   // b=a;
+                    break;
+                }
+            }
+                       
             List<String> nueva = new ArrayList<String>();
             if(lex.get(b).equals("(")){
                 

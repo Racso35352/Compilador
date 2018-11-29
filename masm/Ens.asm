@@ -5,9 +5,10 @@ datos segment para public 'data'
 a DB '7$'
 b DB '16$'
 c DB '2$'
-x DB '131$'
+x DB '0$'
 y DB '4046$'
 z DB '30$'
+k DB '97$'
 datos ends
 extra segment para public 'data'
 extra ends
