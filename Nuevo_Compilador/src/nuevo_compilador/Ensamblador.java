@@ -21,6 +21,7 @@ public class Ensamblador {
     public static int cont =1;
     public static int s =1;
     public static int ss =25;
+    public static int et = 0; //cuenta etiqueta, para que no se repita
     
     
     public static FileWriter fichero = null;
@@ -28,7 +29,7 @@ public class Ensamblador {
     
     public static void empezar(Automatas auto) {
         try{
-         fichero = new FileWriter("C:\\Users\\Oscar\\Documents\\Github\\Compilador\\masm\\Ens.asm"); //Aqui acomodale tu ruta a donde este tu carpeta masm, tambien acuerdate de instalar el DosBox, si no lo tienes dime y te lo paso
+         fichero = new FileWriter("C:\\Users\\Dulce\\Documents\\Github\\Compilador\\masm\\Ens.asm"); //Aqui acomodale tu ruta a donde este tu carpeta masm, tambien acuerdate de instalar el DosBox, si no lo tienes dime y te lo paso
          pw = new PrintWriter(fichero);
          
          
@@ -84,17 +85,15 @@ public class Ensamblador {
     public static void datos(Automatas auto){
         
         Nodo linea=auto.tablaA.obtener();  //Obtiene el primer nodo de la tabla de simbolos
-
+        cadDatos+="no_val DB 'Dato invalido, se espera un numero. Terminando programa$'\n";
         if(linea!=null){
             while(linea!=null){
                 if(linea.lect.equals("S")){ //Si la variable es de lectura
                     if(linea.tipo.equals("cad")){
-                        
                         cadDatos+=linea.nom+" DB 61,?,61 DUP(?)\n";
-                       
-                    }
+                   }
                     else if(linea.tipo.equals("num")){
-                        
+                        cadDatos+=linea.nom+" DB 61,?,61 DUP(?)\n";
                     }
                 }
                 else{
@@ -106,8 +105,7 @@ public class Ensamblador {
                     }
                     else if(linea.tipo.equals("num")){
                         String cad=linea.val;
-                        
-                        cadDatos+=linea.nom+" DB '"+cad+"$'\n";
+                        cadDatos+=linea.nom+" DW "+cad+"\n";
                     }
                 }
                 /*
@@ -152,7 +150,7 @@ public class Ensamblador {
         Nodo linea;
         int cont =0;
         
-            File archivo = new File ("C:\\Users\\Oscar\\Documents\\Github\\Compilador\\Pruebas\\n.txt");
+            File archivo = new File ("C:\\Users\\Dulce\\Documents\\Github\\Compilador\\Pruebas\\n.txt");
             String line;
             try{
             FileReader fr = new FileReader (archivo);
@@ -185,9 +183,44 @@ public class Ensamblador {
                                     "int 21h\n";
                                 cont++;
                             }
-                            if(tipo.equals("num")){
-                                
-                            }
+                        if(tipo.equals("num")){
+                                cc+="mov ah,2\n"+
+	"mov bh,0\n"+
+	"mov dh,"+s+"\n"+
+	"mov dl,"+ss+"\n"+
+	"int 10h\n";
+        s++;
+                                cc+="lea dx,"+var+"\n"+
+                                    "mov ah,0ah\n"+
+                                    "int 21h\n"+
+                                    "lea bx,"+var+"\n"+
+                                    "inc bx\n"+
+                                    "mov cx,[bx]\n"+
+                                    "mov ch,0\n"+
+                                    "ciclo"+et+":\n"+
+                                    "inc bx\n"+
+                                    "mov dl,[bx]\n"+
+                                    "cmp dl,48\n"+
+                                    "jb sale"+et+"\n"+
+                                    "cmp dl,57\n"+
+                                    "ja sale"+et+"\n"+
+                                    "loop ciclo"+et+"\n"+
+                                    "mov ax,byte ptr 0\n"+
+                                    "jmp fin"+et+"\n"+
+                                    "sale"+et+":\n"+
+                                    "mov ax,1\n"+
+                                    "fin"+et+":\n"+
+                                    "cmp ax,byte ptr 1\n"+
+                                    "jne val"+et+"\n"+
+                                    "lea dx,no_val\n"+
+                                    "mov ah,9\n"+
+                                    "int 21h\n"+
+                                    "mov ah,4ch\n"+
+                                    "int 21h\n"+
+                                    "val"+et+":\n";
+                                cont++;
+                                et++;
+                        }
                     }
                     else if(pal.equals("Imprime")){
                         st.nextToken();
@@ -206,12 +239,34 @@ public class Ensamblador {
                                     "inc bx\n"+
                                     "mov cx,[bx]\n"+
                                     "mov ch,0\n"+
-                                    "L"+var+cont+":\n"+
+                                    "L"+var+et+":\n"+
                                     "inc bx\n"+
                                     "mov dl,[bx]\n"+
                                     "mov ah,2\n"+
                                     "int 21h\n"+
-                                    "loop L"+var+cont+"\n";       
+                                    "loop L"+var+et+"\n";
+                                et++;
+                                cont++;
+                            }
+                            else if(tipo.equals("num")){
+                                cc+="mov ah,2\n"+
+	"mov bh,0\n"+
+	"mov dh,"+s+"\n"+
+	"mov dl,"+ss+"\n"+
+	"int 10h\n";
+        s++;
+        
+                                cc+="lea bx,"+var+"\n"+
+                                    "inc bx\n"+
+                                    "mov cx,[bx]\n"+
+                                    "mov ch,0\n"+
+                                    "L"+var+et+":\n"+
+                                    "inc bx\n"+
+                                    "mov dl,[bx]\n"+
+                                    "mov ah,2\n"+
+                                    "int 21h\n"+
+                                    "loop L"+var+et+"\n";
+                                et++;
                                 cont++;
                             }
                         }
@@ -235,10 +290,30 @@ public class Ensamblador {
 	"mov dl,"+(ss)+"\n"+
 	"int 10h\n";
         s++;
-                                    cc+="lea dx,"+var+"\n"+
-                                        "mov ah,9\n"+
-                                        "int 21h\n";
-                                    cont++;
+                                    cc+="lea bx,"+var+"\n"+
+                                        "mov ax,[bx]\n"+
+                                        "mov bp,byte ptr 0ah\n"+
+                                        "mov cx,0\n"+
+                                        "CI"+et+":\n"+
+                                        "inc cx\n"+
+                                        "mov dx,0\n"+
+                                        "div bp\n"+
+                                        "mov di,dx\n"+
+                                        "push di\n"+
+                                        "cmp ax,word ptr 0\n"+
+                                        "jne CI"+et+"\n"+
+                                        "jmp C2"+et+"\n"+
+                                        "C2"+et+":\n"+
+                                        "pop dx\n"+
+                                        "add dl,30h\n"+
+                                        "mov ah,2\n"+
+                                        "int 21h\n"+
+                                        "dec cx\n"+
+                                        "cmp cx,0\n"+
+                                        "jne c2"+et+"\n";
+                                          
+                                et++;
+                                cont++;
                             }
                         }
                     }
