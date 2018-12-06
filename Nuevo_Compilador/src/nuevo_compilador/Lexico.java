@@ -34,6 +34,8 @@ public class Lexico {
    public static String cadena="Cadena";
    public static String caracter="Caracter";
    public static String booleano="Booleano";
+   public static String Repite="Repite";
+   
    public static String dec="DEC";
    
    
@@ -98,6 +100,9 @@ public class Lexico {
       }
       else if(npal.equals(mientras)){
          token=mientras;
+         
+      }else if(npal.equals(Repite)){
+         token=Repite;
          
       }
       else if(npal.equals(dec)){

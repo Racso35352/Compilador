@@ -11,9 +11,14 @@ DEC num z ;
 
 DEC num k ;
 
-
+DEC cad hu ;
 
 Lee k ;
 
+Lee hu ;
+
 Imprime ( k ) ;
+
+Repite b ; 
+Imprime ( hu ) ;
 

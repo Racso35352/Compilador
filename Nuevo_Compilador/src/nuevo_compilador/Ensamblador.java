@@ -29,7 +29,7 @@ public class Ensamblador {
     
     public static void empezar(Automatas auto) {
         try{
-         fichero = new FileWriter("C:\\Users\\Dulce\\Documents\\Github\\Compilador\\masm\\Ens.asm"); //Aqui acomodale tu ruta a donde este tu carpeta masm, tambien acuerdate de instalar el DosBox, si no lo tienes dime y te lo paso
+         fichero = new FileWriter("C:\\Users\\Oscar\\Documents\\Github\\Compilador\\masm\\Ens.asm"); //Aqui acomodale tu ruta a donde este tu carpeta masm, tambien acuerdate de instalar el DosBox, si no lo tienes dime y te lo paso
          pw = new PrintWriter(fichero);
          
          
@@ -150,7 +150,7 @@ public class Ensamblador {
         Nodo linea;
         int cont =0;
         
-            File archivo = new File ("C:\\Users\\Dulce\\Documents\\Github\\Compilador\\Pruebas\\n.txt");
+            File archivo = new File ("C:\\Users\\Oscar\\Documents\\Github\\Compilador\\Pruebas\\n.txt");
             String line;
             try{
             FileReader fr = new FileReader (archivo);
@@ -222,6 +222,41 @@ public class Ensamblador {
                                 et++;
                         }
                     }
+                    /*
+                    else if(pal.equals("Hacer")){
+                        obtValor(st.nextToken());
+                        cc+="mov di, ax";
+                        
+                        
+                    
+                    line=br.readLine())!= null){
+                    StringTokenizer st = new StringTokenizer(line);
+                    String pal=st.nextToken();//Almacena la instrucción
+                        
+                        
+                        
+                        
+                        cc+="mov ah,2\n"+
+	"mov bh,0\n"+
+	"mov dh,"+s+"\n"+
+	"mov dl,"+ss+"\n"+
+	"int 10h\n";
+        s++;
+                                cc+="lea bx,"+var+"\n"+
+                                    "inc bx\n"+
+                                    "mov cx,[bx]\n"+
+                                    "mov ch,0\n"+
+                                    "L"+var+et+":\n"+
+                                    "inc bx\n"+
+                                    "mov dl,[bx]\n"+
+                                    "mov ah,2\n"+
+                                    "int 21h\n"+
+                                    "loop L"+var+et+"\n";
+                                et++;
+                                cont++;
+                        
+                    }
+*/
                     else if(pal.equals("Imprime")){
                         st.nextToken();
                         String var=st.nextToken();
@@ -373,7 +408,7 @@ public class Ensamblador {
         }
     }
     
-    public String obtValor(String var){
+    public static String obtValor(String var){
         String block="";
         
         block+="lea bx,["+var+"]\n"+
@@ -405,7 +440,7 @@ public class Ensamblador {
                "DIVI"+et+":\n"+
                "add [bx],byte ptr 30h\n"+
                "loop DIVI"+et+"\n";
-               et++;
+               
         
         return block;
     }

@@ -38,6 +38,8 @@ public class Automatas {
             else if(tokens.get(0).equals("Hacer"))e=4;            
             else if(tokens.get(0).equals("Desicion"))e=5;         
             else if(tokens.get(0).equals("Variable"))e=6;
+            else if(tokens.get(0).equals("Repite"))e=7;
+            
 
             else {
                 System.out.println("Linea "+cont+ "     Error en palabra reservada ");
@@ -57,6 +59,8 @@ public class Automatas {
         if(e==4)ciclo(cont);
         if(e==5)des(cont);
         if(e==6)vari(cont,lex,token);
+        if(e==7)rep(cont);
+        
 
 
     }
@@ -935,10 +939,22 @@ public class Automatas {
         }
         
     }
+    
+    
 
   public static boolean Ens(){
       return Ensamblar;
   }
 
+  public static void rep(int cont){
+      int x=1;
+      if(tablaA.buscar(lex.get(x))!=null){
+          
+                        }
+                        else{
+                            System.out.println("Linea "+cont+"     Error, variable no declarada");
+                            Ensamblar=false;
+                        }
+  }
 
 }

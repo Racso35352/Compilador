@@ -9,6 +9,7 @@ x DW 0
 y DW 0
 z DW 0
 k DB 61,?,61 DUP(?)
+hu DB 61,?,61 DUP(?)
 datos ends
 extra segment para public 'data'
 extra ends
@@ -69,6 +70,14 @@ mov bh,0
 mov dh,2
 mov dl,25
 int 10h
+lea dx,hu
+mov ah,0ah
+int 21h
+mov ah,2
+mov bh,0
+mov dh,3
+mov dl,25
+int 10h
 lea bx,k
 inc bx
 mov cx,[bx]
@@ -79,6 +88,21 @@ mov dl,[bx]
 mov ah,2
 int 21h
 loop Lk1
+mov ah,2
+mov bh,0
+mov dh,4
+mov dl,25
+int 10h
+lea bx,hu
+inc bx
+mov cx,[bx]
+mov ch,0
+Lhu2:
+inc bx
+mov dl,[bx]
+mov ah,2
+int 21h
+loop Lhu2
 	ret
 p0	endp
 
