@@ -1,8 +1,6 @@
 
-DEC num a = 7 ;
+DEC num a = 0 ;
 DEC num b = 16 ;
-
-DEC num c = 2 ;
 
 DEC num x ;
 
@@ -13,14 +11,9 @@ DEC num z ;
 
 DEC num k ;
 
-x = a + ( ( b + b ) * ( c ) ) + ( ( b ) + ( c * a ) ) * c  ;
 
 
+Lee k ;
 
-y = ( b * c * c * a * ( a + c ) + ( c * a ) )  ;
-
-
-z = b + c * ( a )  ;
-
-k = b * c + ( a * a + b )  ;
+Imprime ( k ) ;
 

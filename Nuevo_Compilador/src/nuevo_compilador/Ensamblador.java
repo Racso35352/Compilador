@@ -317,7 +317,52 @@ public class Ensamblador {
                             }
                         }
                     }
-                    
+                    else if(pal.equals("Si")){
+                        st.nextToken();
+                        String var=st.nextToken();
+                        linea=auto.tablaA.buscar(var);
+                        String tipo=linea.tipo;
+                        String operador=st.nextToken();
+                        String comparador=st.nextToken();
+                        String deci;
+                        
+                        cc+="mov ah,2\n"+
+	"mov bh,0\n"+
+	"mov dh,"+s+"\n"+
+	"mov dl,"+ss+"\n"+
+	"int 10h\n";
+        s++;
+                        if(linea.lect.equals("S")){
+                            if(tipo.equals("num")){
+                                
+                            }
+                            else if(tipo.equals("cad")){
+                                
+                            }
+                        }
+                        else{
+                            
+                        }
+                        
+                        if(operador.equals("<")){
+                            deci="JA";
+                        }
+                        else if(operador.equals(">")){
+                            deci="JB";
+                        }
+                        else if(operador.equals(">=")){
+                            deci="JBE";
+                        }
+                        else if(operador.equals("<=")){
+                            deci="JAE";
+                        }
+                        else if(operador.equals("==")){
+                            deci="JNE";
+                        }
+                        else if(operador.equals("!=")){
+                            deci="JE";
+                        }
+                    }
                         
                     }
             }//while
