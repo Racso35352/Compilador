@@ -373,6 +373,43 @@ public class Ensamblador {
         }
     }
     
+    public String obtValor(String var){
+        String block="";
+        
+        block+="lea bx,["+var+"]\n"+
+               "inc bx\n"+
+               "mov cl,[bx]\n"+
+               "mov ch,0\n"+
+               "push cx\n"+
+               "CDR"+et+":\n"+
+               "inc bx\n"+
+               "sub [bx], byte ptr 30h\n"+
+               "loop CDR"+et+"\n"+
+               "lea bx,"+var+"+2\n"+
+               "mov al,[bx]\n"+
+               "mov di,0ah\n"+
+               "mov ah,0\n"+
+               "pop cx\n"+
+               "push cx\n"+
+               "dec cx\n"+
+               "MYS"+et+":\n"+
+               "inc bx\n"+
+               "mul di\n"+
+               "mov dl,[bx]\n"+
+               "mov dh,0\n"+
+               "add ax,dx\n"+
+               "loop MYS"+et+"\n"+
+               "SC"+et+":\n"+
+               "lea bx,["+var+"+2]\n"+
+               "pop cx\n"+
+               "DIVI"+et+":\n"+
+               "add [bx],byte ptr 30h\n"+
+               "loop DIVI"+et+"\n";
+               et++;
+        
+        return block;
+    }
+    
   
     public static void pila(){
         cadPila+="pila segment para stack 'stack'\n";
