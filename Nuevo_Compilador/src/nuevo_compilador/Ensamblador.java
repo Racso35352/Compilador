@@ -22,6 +22,7 @@ public class Ensamblador {
     public static int s =1;
     public static int ss =25;
     public static int et = 0; //cuenta etiqueta, para que no se repita
+    public static int net = 0; //cuenta nueva etiqueta, para que no se repita
     
     
     public static FileWriter fichero = null;
@@ -222,12 +223,122 @@ public class Ensamblador {
                                 et++;
                         }
                     }
-                    /*
-                    else if(pal.equals("Hacer")){
-                        obtValor(st.nextToken());
-                        cc+="mov di, ax";
+                    
+                    else if(pal.equals("Repite")){
+                        cc+=obtValor(st.nextToken());
+                        net++;
+                        cc+="mov cx, ax\n";
+                         cc+=
+	"mov dh,"+s+"\n";
+        s++;
+                        cc+="repite"+net+": \n";
+                        cc+="push dx\n";
+                        cc+="mov ah,2\n"+
+	"mov bh,0\n"+
+	"mov dl,"+ss+"\n"+
+	"int 10h\n";
+                        line=br.readLine();
+                        if(line!=null){
+                            st = new StringTokenizer(line);
+                            st.nextToken();
+                            st.nextToken();
+                        String var=st.nextToken();
+                        linea=auto.tablaA.buscar(var);
+                        String tipo=linea.tipo;
+                            cc+="push cx\n";
+                            if(linea.lect.equals("S")){
+                            if(tipo.equals("cad")){
+                                                           
+                                cc+="lea bx,"+var+"\n"+
+                                    "inc bx\n"+
+                                    "mov cx,[bx]\n"+
+                                    "mov ch,0\n"+
+                                    "L"+var+et+":\n"+
+                                    "inc bx\n"+
+                                    "mov dl,[bx]\n"+
+                                    "mov ah,2\n"+
+                                    "int 21h\n"+
+                                    "loop L"+var+et+"\n";
+                                et++;
+                                cont++;
+                            }
+                            else if(tipo.equals("num")){
+                                cc+="mov ah,2\n"+
+	"mov bh,0\n"+
+	"mov dh,"+s+"\n"+
+	"mov dl,"+ss+"\n"+
+	"int 10h\n";
+        s++;
+        
+                                cc+="lea bx,"+var+"\n"+
+                                    "inc bx\n"+
+                                    "mov cx,[bx]\n"+
+                                    "mov ch,0\n"+
+                                    "L"+var+et+":\n"+
+                                    "inc bx\n"+
+                                    "mov dl,[bx]\n"+
+                                    "mov ah,2\n"+
+                                    "int 21h\n"+
+                                    "loop L"+var+et+"\n";
+                                et++;
+                                cont++;
+                            }
+                        }
+                        else{
+                            if(tipo.equals("cad")){
+                                                            cc+="mov ah,2\n"+
+	"mov bh,0\n"+
+	"mov dh,"+s+"\n"+
+	"mov dl,"+(ss-1)+"\n"+
+	"int 10h\n";
+        s++;
+                                    cc+="lea dx,"+var+"\n"+
+                                        "mov ah,9\n"+
+                                        "int 21h\n";
+                                    cont++;
+                            }
+                            if(tipo.equals("num")){
+                                                            cc+="mov ah,2\n"+
+	"mov bh,0\n"+
+	"mov dh,"+s+"\n"+
+	"mov dl,"+(ss)+"\n"+
+	"int 10h\n";
+        s++;
+                                    cc+="lea bx,"+var+"\n"+
+                                        "mov ax,[bx]\n"+
+                                        "mov bp,byte ptr 0ah\n"+
+                                        "mov cx,0\n"+
+                                        "CI"+et+":\n"+
+                                        "inc cx\n"+
+                                        "mov dx,0\n"+
+                                        "div bp\n"+
+                                        "mov di,dx\n"+
+                                        "push di\n"+
+                                        "cmp ax,word ptr 0\n"+
+                                        "jne CI"+et+"\n"+
+                                        "jmp C2"+et+"\n"+
+                                        "C2"+et+":\n"+
+                                        "pop dx\n"+
+                                        "add dl,30h\n"+
+                                        "mov ah,2\n"+
+                                        "int 21h\n"+
+                                        "dec cx\n"+
+                                        "cmp cx,0\n"+
+                                        "jne c2"+et+"\n";
+                                          
+                                et++;
+                                cont++;
+                            }
+                        }
+                            cc+="pop cx\n";
+                            cc+="pop dx\n";
+                            cc+="inc dh\n";
+                            
+                            cc+="loop repite"+net+"\n";
+                        }
+                        else ;
                         
-                        
+                    /*    
                     
                     line=br.readLine())!= null){
                     StringTokenizer st = new StringTokenizer(line);
@@ -257,6 +368,7 @@ public class Ensamblador {
                         
                     }
 */
+                    }
                     else if(pal.equals("Imprime")){
                         st.nextToken();
                         String var=st.nextToken();
@@ -408,9 +520,9 @@ public class Ensamblador {
         }
     }
     
-    public static String obtValor(String var){
+    public static String obtValor(String numero){
         String block="";
-        
+        /*
         block+="lea bx,["+var+"]\n"+
                "inc bx\n"+
                "mov cl,[bx]\n"+
@@ -440,6 +552,37 @@ public class Ensamblador {
                "DIVI"+et+":\n"+
                "add [bx],byte ptr 30h\n"+
                "loop DIVI"+et+"\n";
+        */
+        	block+="lea bx,"+numero+"\n"+
+	"inc bx\n"+
+	"mov cl,[bx]\n"+
+	"mov ch,0\n"+
+	"push cx\n"+
+
+"cdr"+et+":\n"+
+	"inc bx\n"+
+	"sub [bx], byte ptr 30h\n"+
+	
+	"loop cdr"+et+"\n"+
+	"lea bx,"+numero+"+2\n"+
+	"mov al,[bx]\n"+
+	"mov di,0ah\n"+
+	"mov ah,0\n"+
+	
+	"pop cx\n"+
+	"cmp cl,1\n"+
+	"je sale"+et+"\n"+
+	"dec cx\n"+
+	
+"mys"+et+":\n"+
+	"inc bx\n"+
+	"mul di\n"+
+	"mov dl,[bx]\n"+
+	"mov dh,0\n"+
+	"add ax,dx\n"+
+	"loop mys"+et+"\n"+
+   
+"sale"+et+":\n";                     
                
         
         return block;
