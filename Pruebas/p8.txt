@@ -1,6 +1,5 @@
-
 DEC num a = 0 ;
-DEC num b ;
+DEC num b = 16 ;
 
 DEC cad o = "Ingrese_el_numero_de_veces" ;
 
@@ -8,9 +7,20 @@ DEC cad u = "Ingrese_el_dato_a_repetir" ;
 
 DEC cad n = "Se_va_a_ejecutar_el_ciclo:" ;
 
-Lee b ;
 
-Si ( 0 < 16 ) [ ;
-Repite b ;
+DEC num k ;
+
+DEC num y ;
+
+DEC cad hu ;
+
 Imprime ( o ) ;
+Lee k ;
 
+Imprime ( u ) ;
+Lee hu ;
+
+
+Si ( 5 > 5 ) [ ;
+Repite k ; 
+Imprime ( hu ) ; 

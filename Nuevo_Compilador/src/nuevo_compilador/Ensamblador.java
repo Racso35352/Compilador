@@ -30,7 +30,7 @@ public class Ensamblador {
     
     public static void empezar(Automatas auto) {
         try{
-         fichero = new FileWriter("C:\\Users\\Dulce\\Documents\\Github\\Compilador\\masm\\Ens.asm"); //Aqui acomodale tu ruta a donde este tu carpeta masm, tambien acuerdate de instalar el DosBox, si no lo tienes dime y te lo paso
+         fichero = new FileWriter("C:\\Users\\Oscar\\Documents\\Github\\Compilador\\masm\\Ens.asm"); //Aqui acomodale tu ruta a donde este tu carpeta masm, tambien acuerdate de instalar el DosBox, si no lo tienes dime y te lo paso
          pw = new PrintWriter(fichero);
          
          
@@ -87,6 +87,8 @@ public class Ensamblador {
         
         Nodo linea=auto.tablaA.obtener();  //Obtiene el primer nodo de la tabla de simbolos
         cadDatos+="no_val DB 'Dato invalido, se espera un numero. Terminando programa$'\n";
+        cadDatos+="e DB 'No se cumplio la condicion$'\n";
+
         if(linea!=null){
             while(linea!=null){
                 if(linea.lect.equals("S")){ //Si la variable es de lectura
@@ -151,7 +153,7 @@ public class Ensamblador {
         Nodo linea;
         int cont =0;
         
-            File archivo = new File ("C:\\Users\\Dulce\\Documents\\Github\\Compilador\\Pruebas\\n.txt");
+            File archivo = new File ("C:\\Users\\Oscar\\Documents\\Github\\Compilador\\Pruebas\\n.txt");
             String line;
             try{
             FileReader fr = new FileReader (archivo);
@@ -334,7 +336,8 @@ public class Ensamblador {
                             cc+="pop dx\n";
                             cc+="inc dh\n";
                             
-                            cc+="loop repite"+net+"\n";
+                            cc+="loop repite"+net+"\n"+
+                                    "jmp fina\n";
                         }
                         else ;
                         
@@ -480,16 +483,16 @@ public class Ensamblador {
         s++;
            
                         if(operador.equals("<")){
-                            deci="JA";
+                            deci="JGE";
                         }
                         else if(operador.equals(">")){
-                            deci="JB";
+                            deci="JLE";
                         }
                         else if(operador.equals(">=")){
-                            deci="JBE";
+                            deci="JL";
                         }
                         else if(operador.equals("<=")){
-                            deci="JAE";
+                            deci="JG";
                         }
                         else if(operador.equals("==")){
                             deci="JNE";
@@ -566,7 +569,10 @@ public class Ensamblador {
                         
                         
                         //si la condicion no se cumple, se salta aca
+                        cc+="jmp fina\n";
                         cc+="salto"+thisEt+":\n";
+                        cc+="lea dx,e\n"+
+                                "mov ah,9\n"+ "int 21h\n";
                         cont++;
                         et++;
                     }
@@ -644,7 +650,7 @@ public class Ensamblador {
    
 "sale"+et+":\n";                     
                
-        
+        et++;
         return block;
     }
     
@@ -971,16 +977,16 @@ public class Ensamblador {
         s++;
            
                         if(operador.equals("<")){
-                            deci="JA";
+                            deci="JG";
                         }
                         else if(operador.equals(">")){
-                            deci="JB";
+                            deci="JL";
                         }
                         else if(operador.equals(">=")){
-                            deci="JBE";
+                            deci="JLE";
                         }
                         else if(operador.equals("<=")){
-                            deci="JAE";
+                            deci="JGE";
                         }
                         else if(operador.equals("==")){
                             deci="JNE";
@@ -1107,7 +1113,7 @@ public class Ensamblador {
     }
     
     public static void cerrar_codigo(){
-        cc+="	ret\n" +
+        cc+="fina: \n" + "	ret\n" +
 "p0	endp\n" +
 "\n" +
 "\n" +
